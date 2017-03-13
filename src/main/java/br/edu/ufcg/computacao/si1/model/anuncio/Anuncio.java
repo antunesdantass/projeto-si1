@@ -28,6 +28,9 @@ public abstract class Anuncio {
     @Column(name = "nota")
     private String nota;
 
+    @ManyToMany
+    @JoinColumn()
+
     public Anuncio(String titulo, Date dataDeCriacao, double preco) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
