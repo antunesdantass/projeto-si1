@@ -1,7 +1,8 @@
 package br.edu.ufcg.computacao.si1.service;
 
+import br.edu.ufcg.computacao.si1.model.usuario.PessoaFísica;
+import br.edu.ufcg.computacao.si1.model.usuario.PessoaJuridica;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.model.UsuarioForm;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,21 +21,20 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Usuario create(UsuarioForm usuarioForm) {
+    public Usuario create(String nome, String email, String senha, String role, String documento) {
 
         Usuario usuario=null;
 
-        switch (usuarioForm.getRole()){
-            case 1:
-                usuario = new Usuario(usuarioForm.getNome(), usuarioForm.getEmail(),
-                        usuarioForm.getSenha(), "USER");
+        switch (role){
+            case "fisica":
+                usuario = new PessoaFísica(nome, email, senha, documento);
                 break;
-            case 2:
-                usuario = new Usuario(usuarioForm.getNome(), usuarioForm.getEmail(),
-                        usuarioForm.getSenha(), "COMPANY");
+
+            case "juridica":
+                usuario = new PessoaJuridica(nome, email, senha, documento);
 
                 //new BCryptPasswordEncoder().encode(usuarioForm.getSenha()), "COMPANY");
-                usuario.setR("COMPANY");
+                usuario.setRole("COMPANY");
                 break;
         }
 

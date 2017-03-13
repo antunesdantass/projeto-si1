@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface UsuarioService {
-    Usuario create(UsuarioForm usuarioForm);
+    Usuario create(String nome, String email, String senha, String role, String documento);
 
     Optional<Usuario> getById(Long id);
 

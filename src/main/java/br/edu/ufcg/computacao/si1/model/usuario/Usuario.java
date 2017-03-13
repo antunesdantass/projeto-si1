@@ -1,25 +1,42 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.LinkedList;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
-public class Usuario extends org.springframework.security.core.userdetails.User{
+public abstract class Usuario extends org.springframework.security.core.userdetails.User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull(message = "O nome não pode ser nulo.")
+    @NotEmpty(message = "O nome não pode ser vazio.")
+    @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres.")
     @Column
     private String nome;
+
+    @NotEmpty(message = "O email não pode ser vazio.")
+    @Email
     @Column(unique = true)
     private String email;
+
+    @NotNull(message = "A senha não pode ser nula.")
+    @NotEmpty
+    @Size(min = 4, max = 16, message = "A senha deve ter entre 4 e 16 caracteres.")
     @Column
     private String senha;
+
+    @NotNull
     @Column
     private String role;
 
@@ -45,12 +62,12 @@ public class Usuario extends org.springframework.security.core.userdetails.User{
         this.id = id;
     }
 
-    public String getN() {
+    public String getNome() {
         return nome;
     }
 
-    public void setN(String n) {
-        this.nome = n;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -69,12 +86,12 @@ public class Usuario extends org.springframework.security.core.userdetails.User{
         this.senha = senha;
     }
 
-    public String getR() {
+    public String getRole() {
         return role;
     }
 
-    public void setR(String r) {
-        this.role = r;
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }
