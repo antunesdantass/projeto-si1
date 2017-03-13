@@ -94,4 +94,12 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
         this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return  "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", role='" + role;
+    }
 }

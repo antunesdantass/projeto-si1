@@ -30,4 +30,12 @@ public class PessoaFísica extends Usuario {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    @Override
+    public String toString() {
+        return "PessoaFísica{" +
+                "cpf='" + cpf + '\'' +
+                super.toString() +
+                '}';
+    }
 }

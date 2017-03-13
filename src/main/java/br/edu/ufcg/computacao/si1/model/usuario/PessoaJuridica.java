@@ -32,4 +32,12 @@ public class PessoaJuridica extends Usuario{
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
+
+    @Override
+    public String toString() {
+        return "PessoaJuridica{" +
+                "cnpj='" + cnpj + '\'' +
+                super.toString() +
+                '}';
+    }
 }
