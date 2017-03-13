@@ -3,10 +3,7 @@ package br.edu.ufcg.computacao.si1.controller;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -22,19 +19,18 @@ public class UsuarioController {
     private UsuarioServiceImpl usuarioService;
 
     @RequestMapping(value = "/criar", method = RequestMethod.POST)
-    public Usuario criarUsuario(@PathVariable String nome, @PathVariable String email, @PathVariable String senha,
-                                @PathVariable String role, @PathVariable String documento){
+    public Usuario criarUsuario(@RequestBody Usuario usuario){
 
-        return usuarioService.create(nome, email, senha, role, documento);
+        return usuarioService.create(usuario);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Optional<Usuario> findByID(@PathVariable Long id){
+    public Optional<Usuario> findByID(@PathVariable("id") Long id){
         return usuarioService.getById(id);
     }
 
     @RequestMapping(value = "/{email}", method = RequestMethod.GET)
-    public Optional<Usuario> findByEmail(@PathVariable String email){
+    public Optional<Usuario> findByEmail(@PathVariable("email") String email){
         return usuarioService.getByEmail(email);
     }
 
@@ -44,12 +40,12 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public boolean update(Usuario usuario) {
+    public boolean update(@RequestBody Usuario usuario) {
         return usuarioService.update(usuario);
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-    public boolean delete(Long id) {
+    public boolean delete(@PathVariable("id") Long id) {
         return usuarioService.delete(id);
     }
 }

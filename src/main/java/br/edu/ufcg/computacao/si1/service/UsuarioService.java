@@ -1,13 +1,12 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.model.UsuarioForm;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface UsuarioService {
-    Usuario create(String nome, String email, String senha, String role, String documento);
+    Usuario create(Usuario usuario);
 
     Optional<Usuario> getById(Long id);
 

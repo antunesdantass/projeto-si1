@@ -21,22 +21,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Usuario create(String nome, String email, String senha, String role, String documento) {
-
-        Usuario usuario=null;
-
-        switch (role){
-            case "fisica":
-                usuario = new PessoaFísica(nome, email, senha, documento);
-                break;
-
-            case "juridica":
-                usuario = new PessoaJuridica(nome, email, senha, documento);
-
-                //new BCryptPasswordEncoder().encode(usuarioForm.getSenha()), "COMPANY");
-                usuario.setRole("COMPANY");
-                break;
-        }
+    public Usuario create(Usuario usuario) {
 
         System.out.println(usuario + "estah sendo criado");
         return usuarioRepository.save(usuario);
