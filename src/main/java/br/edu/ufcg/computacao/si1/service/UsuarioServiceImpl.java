@@ -5,8 +5,7 @@ import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
@@ -26,30 +25,29 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Optional<Usuario> getById(Long id) {
-        return Optional.ofNullable(usuarioRepository.findOne(id));
+    public Usuario getById(Long id) {
+        return usuarioRepository.findOne(id);
     }
 
     @Override
-    public Optional<Usuario> getByEmail(String email) {
+    public Usuario getByEmail(String email) {
         System.out.println(email + "estah sendo retornado");
-        return Optional.ofNullable(usuarioRepository.findByEmail(email));
+        return usuarioRepository.findByEmail(email);
     }
 
     @Override
-    public Collection<Usuario> getAll() {
+    public List<Usuario> getAll() {
         return usuarioRepository.findAll();
     }
 
     @Override
-    public boolean update(Usuario usuario) {
+    public Usuario update(Usuario usuario) {
         System.out.println(usuario + "estah sendo atualizado");
 
         if (usuarioRepository.exists(usuario.getId())) {
-            usuarioRepository.save(usuario);
-            return true;
-        }
-        return false;
+            return usuarioRepository.save(usuario);
+
+            }
     }
 
     @Override

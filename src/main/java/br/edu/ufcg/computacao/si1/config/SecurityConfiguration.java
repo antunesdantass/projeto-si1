@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                    .antMatchers("/","/cadastrar-se", "/user/**", "/company/**").permitAll()
+                    .antMatchers("/","/cadastrar-se", "/user/**", "/company/**", "/usuario/**").permitAll()
 //                    .antMatchers("/user/**").hasAuthority("USER")
 //                    .antMatchers("/company/**").hasAuthority("COMPANY")
                     .anyRequest().fullyAuthenticated()

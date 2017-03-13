@@ -2,19 +2,17 @@ package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
-import java.util.Collection;
-import java.util.Optional;
-
+import java.util.List;
 public interface UsuarioService {
     Usuario create(Usuario usuario);
 
-    Optional<Usuario> getById(Long id);
+    Usuario getById(Long id);
 
-    Optional<Usuario> getByEmail(String email);
+    Usuario getByEmail(String email);
 
-    Collection<Usuario> getAll();
+    List<Usuario> getAll();
 
-    boolean update(Usuario usuario);
+    Usuario update(Usuario usuario);
 
     boolean delete(Long id);
 }
