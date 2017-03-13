@@ -11,13 +11,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class PessoaFísica extends Usuario {
+public class PessoaFisica extends Usuario {
 
     @CPF
     @Column
     private String cpf;
 
-    public PessoaFísica(String nome, String email, String senha, String cpf){
+    public PessoaFisica(String nome, String email, String senha, String cpf){
         super(nome, email, senha, "USER");
 
         this.cpf = cpf;
@@ -33,7 +33,7 @@ public class PessoaFísica extends Usuario {
 
     @Override
     public String toString() {
-        return "PessoaFísica{" +
+        return "PessoaFisica{" +
                 "cpf='" + cpf + '\'' +
                 super.toString() +
                 '}';

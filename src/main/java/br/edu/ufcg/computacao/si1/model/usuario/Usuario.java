@@ -1,5 +1,8 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +17,13 @@ import java.util.LinkedList;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = PessoaFisica.class, name = "Fisica"),
+
+        @JsonSubTypes.Type(value = PessoaJuridica.class, name = "Juridica") }
+)
 public abstract class Usuario extends org.springframework.security.core.userdetails.User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -87,7 +97,7 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
     }
 
     public String getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(String role) {
