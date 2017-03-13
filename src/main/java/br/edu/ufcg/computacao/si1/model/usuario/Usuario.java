@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.AuthorityUtils;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,7 +24,8 @@ import java.util.LinkedList;
 
         @JsonSubTypes.Type(value = PessoaJuridica.class, name = "Juridica") }
 )
-public abstract class Usuario extends org.springframework.security.core.userdetails.User{
+//public abstract class Usuario extends org.springframework.security.core.userdetails.User{
+public abstract class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -50,13 +51,13 @@ public abstract class Usuario extends org.springframework.security.core.userdeta
     @Column
     private String role;
 
-    public Usuario() {
-        super("default", "default", AuthorityUtils.createAuthorityList("USER"));
-    }
+//    public Usuario() {
+//        super("default", "default", AuthorityUtils.createAuthorityList("USER"));
+//    }
 
     public Usuario(String nome, String email, String senha, String role) {
 
-        super(email, senha, AuthorityUtils.createAuthorityList(role));
+//        super(email, senha, AuthorityUtils.createAuthorityList(role));
 
         this.nome = nome;
         this.email = email;

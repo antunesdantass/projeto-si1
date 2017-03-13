@@ -24,13 +24,18 @@ public class UsuarioController {
         return usuarioService.create(usuario);
     }
 
+    @RequestMapping(value = "/criar/mock", method = RequestMethod.GET)
+    public Usuario criarUsuarioMock(){
+        return usuarioService.createMock();
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Optional<Usuario> findByID(@PathVariable("id") Long id){
+    public Usuario findByID(@PathVariable("id") Long id){
         return usuarioService.getById(id);
     }
 
     @RequestMapping(value = "/{email}", method = RequestMethod.GET)
-    public Optional<Usuario> findByEmail(@PathVariable("email") String email){
+    public Usuario findByEmail(@PathVariable("email") String email){
         return usuarioService.getByEmail(email);
     }
 
@@ -40,7 +45,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public boolean update(@RequestBody Usuario usuario) {
+    public Usuario update(@RequestBody Usuario usuario) {
         return usuarioService.update(usuario);
     }
 

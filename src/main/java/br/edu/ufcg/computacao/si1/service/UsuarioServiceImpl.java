@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.service;
 
+import br.edu.ufcg.computacao.si1.model.usuario.PessoaFisica;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class UsuarioServiceImpl implements UsuarioService{
             return usuarioRepository.save(usuario);
 
             }
+            return null;
     }
 
     @Override
@@ -57,5 +59,9 @@ public class UsuarioServiceImpl implements UsuarioService{
             return true;
         }
         return false;
+    }
+
+    public Usuario createMock() {
+        return usuarioRepository.save(new PessoaFisica("Adson", "adson@email.com", "12345678", "USER"));
     }
 }
