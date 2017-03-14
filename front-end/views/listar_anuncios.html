@@ -13,10 +13,10 @@
                         {{anuncio.type}}
                     </div>
                     <div class="col-xs-2">
-                        {{anuncio.price | currency: 'R$ '}}
+                        {{anuncio.date | date: 'dd/MM/yyyy'}}
                     </div>
                     <div class="col-xs-2">
-                        <button class="btn btn-default" type="button">Comprar</button>
+                        {{anuncio.price | currency: 'R$ '}}
                     </div>
                 </div>
             </div>

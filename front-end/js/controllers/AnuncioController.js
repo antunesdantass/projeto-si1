@@ -9,7 +9,9 @@ angular.module('adExtreme').controller('AnuncioController', function ($scope, $r
         if (!$rootScope.anuncios) {
             $rootScope.anuncios = [];
         }
+        $scope.ad.date = new Date();
         $rootScope.anuncios.push($scope.ad);
         $scope.ad = {};
+        $scope.ad.type = $scope.types[0];
     };
 });
