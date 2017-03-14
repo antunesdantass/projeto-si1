@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -15,73 +16,56 @@ import java.util.stream.Collectors;
  */
 @Service
 public class AnuncioServiceImpl implements AnuncioService {
-    //TODO add validity checks
 
     private AnuncioRepository anuncioRepository;
 
     @Autowired
     public AnuncioServiceImpl(AnuncioRepository anuncioRepository) {
-        /*neste codigo apenas atribuimos o repositorio jpa ao atributo */
         this.anuncioRepository = anuncioRepository;
-    }
-
-    public AnuncioRepository getAnuncioRepository(){
-        return this.anuncioRepository;
     }
 
     @Override
     public Anuncio create(Anuncio anuncio) {
-        /*aqui salvamos o anuncio recem criado no repositorio jpa*/
         return anuncioRepository.save(anuncio);
     }
 
     @Override
-    public Optional<Anuncio> getById(Long id) {
-        /*aqui recuperamos o anuncio pelo seu id*/
-        return Optional.ofNullable(anuncioRepository.findOne(id));
+    public Anuncio getById(Long id) {
+        return anuncioRepository.findOne(id);
     }
 
     @Override
-    public Collection<Anuncio> get(String tipo) {
-        return null;
+    public List<Anuncio> getByTipo(String tipo) {
+        if (tipo.equalsIgnoreCase("emprego")) {
+            return anuncioRepository.findAllOfEmprego();
+        } else if (tipo.equalsIgnoreCase("movel")) {
+            return anuncioRepository.findAllOfMovel();
+        } else if (tipo.equalsIgnoreCase("imovel")) {
+            return anuncioRepository.findAllOfImovel();
+        } else {
+            return null;
+        }
     }
 
-//    @Override
-//    public Collection<Anuncio> get(String tipo) {
-//
-//        /*pegamos aqui todos os anuncios, mas retornamos os anuncios por tipo
-//        * filtrando o tipo, pelo equals, retornando um arrayLista*/
-//        return anuncioRepository.findAll().stream()
-//                .filter(anuncio -> anuncio.getTipo().equals(tipo))
-//                .collect(Collectors.toCollection(ArrayList::new));
-//    }
-
     @Override
-    public Collection<Anuncio> getAll() {
-        /*aqui retornamos todos os anuncios, sem distincao*/
-
+    public List<Anuncio> findAll() {
         return anuncioRepository.findAll();
     }
 
     @Override
-    public boolean update(Anuncio anuncio) {
-        /*a atualizacao do anuncio eh feita apenas se o anuncio ja existir*/
+    public Anuncio update(Anuncio anuncio) {
+
         if (anuncioRepository.exists(anuncio.getId())) {
-            anuncioRepository.save(anuncio);
-            return true;
+           return anuncioRepository.save(anuncio);
         }
-        return false;
+        return null;
     }
 
     @Override
-    public boolean delete(Long id) {
-        /*aqui se apaga o anuncio se ele existir*/
-
+    public void delete(Long id) {
 
         if (anuncioRepository.exists(id)) {
             anuncioRepository.delete(id);
-            return true;
         }
-        return false;
     }
 }

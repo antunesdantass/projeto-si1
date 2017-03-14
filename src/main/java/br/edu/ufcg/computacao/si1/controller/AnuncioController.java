@@ -1,65 +1,53 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
-import br.edu.ufcg.computacao.si1.model.AnuncioForm;
-import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
+import br.edu.ufcg.computacao.si1.model.anuncio.Emprego;
+import br.edu.ufcg.computacao.si1.model.anuncio.Imovel;
+import br.edu.ufcg.computacao.si1.model.anuncio.Movel;
 import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
 
-import javax.validation.Valid;
+import java.util.Date;
+import java.util.List;
 
-@Controller
+@CrossOrigin
+@RequestMapping(value = "ad-extreme/anuncio")
+@RestController
 public class AnuncioController {
 
     @Autowired
     private AnuncioServiceImpl anuncioService;
 
-    @Autowired
-    private AnuncioRepository anuncioRep;
-
-    @RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.GET)
-    public ModelAndView getPageCadastrarAnuncio(AnuncioForm anuncioForm){
-        ModelAndView model = new ModelAndView();
-
-        model.addObject("tipos", anuncioForm.getTipos());
-        model.setViewName("user/cadastrar_anuncio");
-
-        return model;
+    @RequestMapping(
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Anuncio>> getAll() {
+       return new ResponseEntity<List<Anuncio>>(anuncioService.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/listar/anuncios", method = RequestMethod.GET)
-    public ModelAndView getPageListarAnuncios(){
-        ModelAndView model = new ModelAndView();
-
-        model.addObject("anuncios", anuncioRep.findAll());
-
-        model.setViewName("user/listar_anuncios");
-
-        return model;
-    }
-
-    @RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.POST)
-    public ModelAndView cadastroAnuncio(@Valid AnuncioForm anuncioForm, BindingResult result, RedirectAttributes attributes){
-        if(result.hasErrors()){
-            return getPageCadastrarAnuncio(anuncioForm);
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Anuncio> findOne(@PathVariable("id") Long id) {
+        Anuncio anuncio = anuncioService.getById(id);
+        if (anuncio != null) {
+            return new ResponseEntity<Anuncio>(anuncio, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Anuncio>(HttpStatus.NOT_FOUND);
         }
-
-//        Anuncio anuncio = new Anuncio();
-//        anuncio.setTitulo(anuncioForm.getTitulo());
-//        anuncio.setPreco(anuncioForm.getPreco());
-//        anuncio.setTipo(anuncioForm.getTipo());
-//
-//        anuncioService.create(anuncio);
-
-        attributes.addFlashAttribute("mensagem", "Anúncio cadastrado com sucesso!");
-        return new ModelAndView("redirect:/user/cadastrar/anuncio");
     }
 
+    @RequestMapping(
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Anuncio> create(@RequestBody Anuncio anuncio) {
+        Anuncio novoAnuncio = anuncioService.create(anuncio);
+        return new ResponseEntity<Anuncio>(anuncio, HttpStatus.CREATED);
+    }
 
 }

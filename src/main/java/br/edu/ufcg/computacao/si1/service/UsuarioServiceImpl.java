@@ -14,14 +14,12 @@ public class UsuarioServiceImpl implements UsuarioService{
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
     @Override
     public Usuario create(Usuario usuario) {
-
-        System.out.println(usuario + "estah sendo criado");
         return usuarioRepository.save(usuario);
     }
 
@@ -32,7 +30,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public Usuario getByEmail(String email) {
-        System.out.println(email + "estah sendo retornado");
         return usuarioRepository.findByEmail(email);
     }
 
@@ -43,25 +40,17 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public Usuario update(Usuario usuario) {
-        System.out.println(usuario + "estah sendo atualizado");
 
         if (usuarioRepository.exists(usuario.getId())) {
             return usuarioRepository.save(usuario);
-
             }
-            return null;
+        return null;
     }
 
     @Override
-    public boolean delete(Long id) {
+    public void delete(Long id) {
         if (usuarioRepository.exists(id)) {
             usuarioRepository.delete(id);
-            return true;
         }
-        return false;
-    }
-
-    public Usuario createMock() {
-        return usuarioRepository.save(new PessoaFisica("Adson", "adson@email.com", "12345678", "USER"));
     }
 }

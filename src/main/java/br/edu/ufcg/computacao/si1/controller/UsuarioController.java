@@ -3,54 +3,70 @@ package br.edu.ufcg.computacao.si1.controller;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
  * Created by adson_silva on 12/03/17.
  */
+@CrossOrigin
+@RequestMapping("ad-extreme/usuario")
 @RestController
-@RequestMapping("/usuario")
 public class UsuarioController {
 
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
-    @RequestMapping(value = "/criar", method = RequestMethod.POST)
-    public Usuario criarUsuario(@RequestBody Usuario usuario){
-
+    @RequestMapping(
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Usuario create(@RequestBody Usuario usuario){
         return usuarioService.create(usuario);
     }
 
-    @RequestMapping(value = "/criar/mock", method = RequestMethod.GET)
-    public Usuario criarUsuarioMock(){
-        return usuarioService.createMock();
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Usuario findByID(@PathVariable("id") Long id){
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Usuario findByID(@PathVariable("id") Long id) {
         return usuarioService.getById(id);
     }
 
-    @RequestMapping(value = "/{email}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = "/{email}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario findByEmail(@PathVariable("email") String email){
         return usuarioService.getByEmail(email);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Collection<Usuario> getAll(){
+    @RequestMapping(
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Usuario> getAll(){
         return usuarioService.getAll();
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public Usuario update(@RequestBody Usuario usuario) {
-        return usuarioService.update(usuario);
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.PUT,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Usuario update(@PathVariable("id") Long id, @RequestBody Usuario usuario) {
+        if (id == usuario.getId()) {
+            return usuarioService.update(usuario);
+        } else {
+            return null;
+        }
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-    public boolean delete(@PathVariable("id") Long id) {
-        return usuarioService.delete(id);
+    @RequestMapping(
+            value="/{id}",
+            method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") Long id) {
+        usuarioService.delete(id);
     }
 }

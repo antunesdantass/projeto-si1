@@ -13,28 +13,15 @@ import javax.persistence.Table;
 @Table
 public class PessoaFisica extends Usuario {
 
-    @CPF
-    @Column
-    private String cpf;
-
-    public PessoaFisica(String nome, String email, String senha, String cpf){
-        super(nome, email, senha, "USER");
-
-        this.cpf = cpf;
+    public PessoaFisica(String nome, String email, String senha){
+        super(nome, email, senha);
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+    public PessoaFisica() { super(); }
 
     @Override
     public String toString() {
         return "PessoaFisica{" +
-                "cpf='" + cpf + '\'' +
                 super.toString() +
                 '}';
     }

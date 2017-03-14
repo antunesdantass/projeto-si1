@@ -4,6 +4,7 @@ import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
 import java.util.List;
 public interface UsuarioService {
+
     Usuario create(Usuario usuario);
 
     Usuario getById(Long id);
@@ -14,5 +15,6 @@ public interface UsuarioService {
 
     Usuario update(Usuario usuario);
 
-    boolean delete(Long id);
+    void delete(Long id);
+
 }

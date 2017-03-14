@@ -12,31 +12,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class PessoaJuridica extends Usuario{
+public class PessoaJuridica extends Usuario {
 
-    @CNPJ
-    @Column
-    private String cnpj;
-
-    public PessoaJuridica(String nome, String email, String senha, String cnpj){
-        super(nome, email, senha, "COMPANY");
-
-        this.cnpj = cnpj;
-
+    public PessoaJuridica(String nome, String email, String senha){
+        super(nome, email, senha);
     }
 
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
+    public PessoaJuridica() { super(); }
 
     @Override
     public String toString() {
         return "PessoaJuridica{" +
-                "cnpj='" + cnpj + '\'' +
                 super.toString() +
                 '}';
     }

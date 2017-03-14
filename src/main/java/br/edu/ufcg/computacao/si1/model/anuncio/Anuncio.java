@@ -1,40 +1,66 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
+import br.edu.ufcg.computacao.si1.model.Nota;
+import br.edu.ufcg.computacao.si1.model.usuario.PessoaFisica;
+import br.edu.ufcg.computacao.si1.model.usuario.PessoaJuridica;
+import com.fasterxml.jackson.annotation.*;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 @Table(name = "tb_anuncio")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Emprego.class, name = "emprego"),
+        @JsonSubTypes.Type(value = Imovel.class, name = "imovel"),
+        @JsonSubTypes.Type(value = Movel.class, name = "movel")}
+)
 public abstract class Anuncio {
 
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+
+    @Column(insertable = false, updatable = false)
+    @JsonIgnore
+    private String dtype;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
+    @NotNull(message = "O titulo não pode ser nulo.")
+    @NotEmpty(message = "O titulo não pode esta vazio.")
+    @Size(min = 10, max = 100, message = "O titulo deve ter entre 2 e 100 caracters")
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
     @Column(name = "data_criacao", nullable = false)
+    @JsonFormat(pattern = "dd-MMM-yyyy HH:mm:ss")
     private Date dataDeCriacao;
 
+    @NotNull(message = "O preçço não pode ser nulo.")
+    @DecimalMin(value = "0.1", message = "O preço minimo é 0.1 para um anúncio.")
     @Column(name = "preco", nullable = false)
     private double preco;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "nota")
-    private String nota;
-
-    public Anuncio(String titulo, Date dataDeCriacao, double preco) {
-        this.titulo = titulo;
-        this.dataDeCriacao = dataDeCriacao;
-        this.preco = preco;
-    }
+    private Nota nota;
 
     public Anuncio() {}
+
+    public Anuncio(String titulo, double preco) {
+        this.titulo = titulo;
+        this.preco = preco;
+    }
 
     public Long getId() {
         return id;
@@ -68,11 +94,11 @@ public abstract class Anuncio {
         this.preco = preco;
     }
 
-    public String getNota() {
+    public Nota getNota() {
         return nota;
     }
 
-    public void setNota(String nota) {
+    public void setNota(Nota nota) {
         this.nota = nota;
     }
 
@@ -83,14 +109,19 @@ public abstract class Anuncio {
 
         Anuncio anuncio = (Anuncio) o;
 
-        if (!id.equals(anuncio.id)) return false;
-        return titulo.equals(anuncio.titulo);
+        if (Double.compare(anuncio.preco, preco) != 0) return false;
+        if (titulo != null ? !titulo.equals(anuncio.titulo) : anuncio.titulo != null) return false;
+        return dataDeCriacao != null ? dataDeCriacao.equals(anuncio.dataDeCriacao) : anuncio.dataDeCriacao == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + titulo.hashCode();
+        int result;
+        long temp;
+        result = titulo != null ? titulo.hashCode() : 0;
+        result = 31 * result + (dataDeCriacao != null ? dataDeCriacao.hashCode() : 0);
+        temp = Double.doubleToLongBits(preco);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 
