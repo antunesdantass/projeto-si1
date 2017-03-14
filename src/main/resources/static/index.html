@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="adExtreme">
     <head>
         <title>.:: ad-extreme ::. - index</title>
 
@@ -20,9 +20,15 @@
 
         <!-- Angular Configuration -->
         <script src="js/app.js"></script>
+        <script src="js/routes.js"></script>
+        <script src="js/controllers/CompanyController.js"></script>
     </head>
 
     <body>
-        corpo do index
+        <div id="menu" class="navbar navbar-default" role="navigation">
+            <div ng-include="'views/common/navbar.html'"></div>
+        </div>
+
+        <div ng-view></div>
     </body>
 </html>
