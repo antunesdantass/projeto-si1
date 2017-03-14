@@ -1,0 +1,28 @@
+<h4>
+    Anúncios
+</h4>
+<div ng-show="ads.length">
+    <div ng-repeat="anuncio in ads">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        {{anuncio.title}}
+                    </div>
+                    <div class="col-xs-2">
+                        {{anuncio.type}}
+                    </div>
+                    <div class="col-xs-2">
+                        {{anuncio.price | currency: 'R$ '}}
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-default" type="button">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-hide="ads.length">
+    <p>Não há anúncios cadastrados.</p>
+</div>
