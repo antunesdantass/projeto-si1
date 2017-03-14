@@ -17,6 +17,14 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider) 
             templateUrl: 'views/listar_anuncios.html',
             controller: 'AnunciosController'
         })
+        .when('/login', {
+            templateUrl: 'views/autenticacao/login.html',
+            controller: 'LoginController'
+        })
+        .when('/cadastro', {
+            templateUrl: 'views/autenticacao/cadastro.html',
+            controller: 'CadastroController'
+        })
         .otherwise({
             redirectTo: '/'
         });
