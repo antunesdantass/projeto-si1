@@ -2,21 +2,21 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider) 
 
     $routeProvider
         .when('/', {
-            // templateUrl: '', // colocar a view dos anuncios
-            template: 'home'
-        })
-        .when('/company', {
-            templateUrl: 'views/company/company_home.html',
-            controller: 'CompanyController'
-        })
-        .when('/anuncio', {
-            templateUrl: 'views/criar_anuncio.html',
-            controller: 'AnuncioController'
-        })
-        .when('/lista_anuncios', {
-            templateUrl: 'views/listar_anuncios.html',
+            templateUrl: 'views/anuncio/listar_anuncios.html',
             controller: 'AnunciosController'
         })
+        .when('/empresa', {
+            templateUrl: 'views/empresa/home_empresa.html',
+            controller: 'UsuarioController'
+        })
+        .when('/anuncio', {
+            templateUrl: 'views/anuncio/criar_anuncio.html',
+            controller: 'AnuncioController'
+        })
+        // .when('/lista_anuncios', {
+        //     templateUrl: 'views/listar_anuncios.html',
+        //     controller: 'AnunciosController'
+        // })
         .when('/login', {
             templateUrl: 'views/autenticacao/login.html',
             controller: 'LoginController'
