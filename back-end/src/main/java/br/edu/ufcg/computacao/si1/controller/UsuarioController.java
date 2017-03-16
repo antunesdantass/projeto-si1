@@ -1,6 +1,10 @@
 package br.edu.ufcg.computacao.si1.controller;
 
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.usuario.PessoaFisica;
+import br.edu.ufcg.computacao.si1.model.usuario.PessoaJuridica;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import br.edu.ufcg.computacao.si1.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,6 +25,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioServiceImpl usuarioService;
+
+    private AnuncioServiceImpl anuncioService;
 
     @RequestMapping(
             method = RequestMethod.POST,
@@ -68,5 +74,19 @@ public class UsuarioController {
             method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
         usuarioService.delete(id);
+    }
+
+    @RequestMapping(
+            value = "/efetuarCompra",
+            method = RequestMethod.PUT)
+    public void efetuarCompra(@PathVariable("idComprador") Long idComprador,
+                              @PathVariable("idAnuncio") Long idAnuncio){
+        Anuncio anuncio = anuncioService.getById(idAnuncio);
+        Usuario comprador = usuarioService.getById(idComprador);
+//        Usuario vendedor = usuarioService.getById()
+        
+
+        comprador.comprar(anuncio.getPreco());
+
     }
 }

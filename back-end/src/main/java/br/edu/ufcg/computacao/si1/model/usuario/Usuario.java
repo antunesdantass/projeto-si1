@@ -41,6 +41,8 @@ public abstract class Usuario {
     @Column
     private String senha;
 
+    private Financas financas;
+
     public Usuario(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
@@ -81,11 +83,20 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
+    public void comprar(double valor){
+        financas.creditar(valor);
+    }
+
+    public void vender(double valor){
+        financas.debitar(valor);
+    }
+
     @Override
     public String toString() {
         return  "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
-                ", senha='" + senha + '\'';
+                ", senha='" + senha + '\'' +
+                ", financas='" + financas.getSaldo() + '\'';
     }
 }
