@@ -1,8 +1,10 @@
-angular.module('adExtreme').controller('LoginController', function ($scope, LoginService) {
+angular.module('adExtreme').controller('LoginController', function ($scope, AuthenticationService) {
+
     $scope.user;
     $scope.password;
 
     $scope.login = function () {
-       LoginService.login($scope.user, $scope.password)
+       AuthenticationService.login($scope.user, $scope.password)
    }
+   
 });

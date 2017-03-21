@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -37,6 +38,7 @@ public abstract class Usuario {
 
     @NotNull(message = "A senha não pode ser nula.")
     @NotEmpty
+    @JsonIgnore
     @Size(min = 4, max = 16, message = "A senha deve ter entre 4 e 16 caracteres.")
     @Column
     private String senha;

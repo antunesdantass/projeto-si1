@@ -50,6 +50,15 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.193</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
 
 		<!-- lib's web -->
 		<!--<dependency>-->
