@@ -39,17 +39,6 @@ public class AuthenticationService {
         return null;
     }
 
-    public String tokenFor(Usuario usuario) throws IOException, URISyntaxException {
-
-        Date expiration = Date.from(LocalDateTime.now().plusHours(24 * 7).toInstant(ZoneOffset.UTC));
-        return Jwts.builder()
-                .setSubject(usuario.getEmail())
-                .setExpiration(expiration)
-                .setIssuer(ISSUER)
-                .signWith(SignatureAlgorithm.HS512, secretKey)
-                .compact();
-    }
-
     public Usuario getUserFromToken(String token) throws IOException, URISyntaxException {
         Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
 
