@@ -26,7 +26,9 @@ public class UsuarioController {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
+    @Autowired
     private AnuncioServiceImpl anuncioService;
+
 
     @RequestMapping(
             method = RequestMethod.POST,
@@ -35,7 +37,7 @@ public class UsuarioController {
         return usuarioService.create(usuario);
     }
 
-    @RequestMapping(value = "/{id}",
+    @RequestMapping(value = "id/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario findByID(@PathVariable("id") Long id) {
@@ -43,7 +45,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(
-            value = "/{email}",
+            value = "email/{email}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario findByEmail(@PathVariable("email") String email){
@@ -79,14 +81,15 @@ public class UsuarioController {
     @RequestMapping(
             value = "/efetuarCompra",
             method = RequestMethod.PUT)
-    public void efetuarCompra(@PathVariable("idComprador") Long idComprador,
-                              @PathVariable("idAnuncio") Long idAnuncio){
+    public void efetuarCompra(@RequestBody Long idComprador,
+                              @RequestBody Long idAnuncio){
         Anuncio anuncio = anuncioService.getById(idAnuncio);
+
         Usuario comprador = usuarioService.getById(idComprador);
-//        Usuario vendedor = usuarioService.getById()
-        
+        Usuario vendedor = usuarioService.getById(anuncio.getIdAutor());
 
         comprador.comprar(anuncio.getPreco());
+        vendedor.vender(anuncio.getPreco());
 
     }
 }

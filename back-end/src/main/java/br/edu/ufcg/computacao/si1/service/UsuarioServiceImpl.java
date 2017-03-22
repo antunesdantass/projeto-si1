@@ -18,6 +18,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         this.usuarioRepository = usuarioRepository;
     }
 
+
     @Override
     public Usuario create(Usuario usuario) {
         return usuarioRepository.save(usuario);

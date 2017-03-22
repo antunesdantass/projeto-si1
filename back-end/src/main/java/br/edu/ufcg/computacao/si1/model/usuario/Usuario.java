@@ -84,11 +84,11 @@ public abstract class Usuario {
     }
 
     public void comprar(double valor){
-        financas.creditar(valor);
+        financas.debitar(valor);
     }
 
     public void vender(double valor){
-        financas.debitar(valor);
+        financas.creditar(valor);
     }
 
     @Override

@@ -36,6 +36,9 @@ public abstract class Anuncio {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
+    @Column
+    private Long idAutor;
+
     @NotNull(message = "O titulo não pode ser nulo.")
     @NotEmpty(message = "O titulo não pode esta vazio.")
     @Size(min = 10, max = 100, message = "O titulo deve ter entre 2 e 100 caracters")
@@ -100,6 +103,14 @@ public abstract class Anuncio {
 
     public void setNota(Nota nota) {
         this.nota = nota;
+    }
+
+    public Long getIdAutor() {
+        return idAutor;
+    }
+
+    public void setIdAutor(Long idAutor) {
+        this.idAutor = idAutor;
     }
 
     @Override
