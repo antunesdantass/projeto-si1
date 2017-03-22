@@ -26,3 +26,8 @@ form {
 	margin: 20px 0;
 	text-align: center;
 }
+
+.btn-group-justified {
+	max-width: 50%;
+	margin: auto;
+}
