@@ -1,19 +1,19 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
 /**
- * Created by Antunes Dantas on 20/03/17.
+ * Created by Antunes Dantas on 22/03/17.
  */
-public class AccountCredentials {
+public class LoginUser {
 
-    private String username;
+    private String email;
     private String password;
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

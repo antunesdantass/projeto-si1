@@ -1,1 +1,1 @@
-angular.module('adExtreme', ['ngRoute', 'ngResource', 'toastr']);
+angular.module('adExtreme', ['ngRoute', 'ngResource', 'toastr', 'ngStorage']);

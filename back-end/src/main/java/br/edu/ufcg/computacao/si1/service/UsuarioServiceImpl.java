@@ -53,4 +53,10 @@ public class UsuarioServiceImpl implements UsuarioService{
             usuarioRepository.delete(id);
         }
     }
+
+    @Override
+    public boolean authenticate(String email, String password) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        return (usuario != null && usuario.getSenha().equals(password));
+    }
 }

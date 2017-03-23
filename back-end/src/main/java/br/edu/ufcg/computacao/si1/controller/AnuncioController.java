@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
-@RequestMapping(value = "ad-extreme/anuncio")
+@RequestMapping(value = "/ad-extreme/anuncio")
 @RestController
 public class AnuncioController {
 

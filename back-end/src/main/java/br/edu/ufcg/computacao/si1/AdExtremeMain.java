@@ -2,11 +2,13 @@ package br.edu.ufcg.computacao.si1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
-public class InitialPoint {
+@ServletComponentScan(value="br.edu.ufcg.computacao.si1.security")
+public class AdExtremeMain {
 
 	public static void main(String[] args) {
-		SpringApplication.run(InitialPoint.class, args);
+		SpringApplication.run(AdExtremeMain.class, args);
 	}
 }
