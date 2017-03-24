@@ -1,0 +1,14 @@
+<div ng-hide="anuncios.length == 0">
+    <center>
+        <table style="width: 700px" class="table table-striped">
+            <tr>
+                  <th><center>Titulo</center></th>
+                  <th>Preço</th>
+            </tr>
+                  <tr ng-repeat="anuncio in anuncios">
+                  <td> <center> {{ anuncio.titulo }} </center></td>
+                  <td> {{ anuncio.preco }} </td>
+            </tr>
+        </table>
+    </center>
+</div>
