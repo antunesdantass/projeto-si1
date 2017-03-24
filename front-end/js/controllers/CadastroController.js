@@ -1,5 +1,5 @@
 angular.module('adExtreme').controller('CadastroController', function ($scope, CadastroService, toastr) {
-    $scope.user = {};
+    $scope.user = {'@type' : 'Fisica'};
     $scope.type;
     $scope.pass1;
     $scope.pass2;
