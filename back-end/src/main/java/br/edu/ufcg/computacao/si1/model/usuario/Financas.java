@@ -1,13 +1,26 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
 /**
  * Created by adson_silva on 15/03/17.
  */
+@Entity(name = "Financas")
+@Table(name = "tb_financas")
 public class Financas {
 
+    @Column
+    @NotNull
     private double saldo;
+
+    @Column
+    @NotNull
     private ArrayList<String> extrato;
 
     public Financas(){

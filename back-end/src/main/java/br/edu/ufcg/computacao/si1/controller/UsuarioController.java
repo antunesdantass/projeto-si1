@@ -26,9 +26,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
-    @Autowired
-    private AnuncioServiceImpl anuncioService;
-
 
     @RequestMapping(
             method = RequestMethod.POST,
@@ -76,20 +73,5 @@ public class UsuarioController {
             method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
         usuarioService.delete(id);
-    }
-
-    @RequestMapping(
-            value = "/efetuarCompra",
-            method = RequestMethod.PUT)
-    public void efetuarCompra(@RequestBody Long idComprador,
-                              @RequestBody Long idAnuncio){
-        Anuncio anuncio = anuncioService.getById(idAnuncio);
-
-        Usuario comprador = usuarioService.getById(idComprador);
-        Usuario vendedor = usuarioService.getById(anuncio.getIdAutor());
-
-        comprador.comprar(anuncio.getPreco());
-        vendedor.vender(anuncio.getPreco());
-
     }
 }
