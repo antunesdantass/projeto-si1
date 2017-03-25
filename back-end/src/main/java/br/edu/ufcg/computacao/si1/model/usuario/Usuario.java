@@ -41,12 +41,14 @@ public abstract class Usuario {
     @Column
     private String senha;
 
+    @Column
     private Financas financas;
 
     public Usuario(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.financas = new Financas();
     }
 
     public Usuario() {}

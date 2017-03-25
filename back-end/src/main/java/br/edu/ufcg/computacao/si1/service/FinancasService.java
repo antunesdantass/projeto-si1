@@ -8,5 +8,5 @@ import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
  */
 public interface FinancasService {
 
-    void efetuarCompra(Anuncio anuncio, Usuario vendedor, Usuario comprador);
+    void efetuarCompra(Long idComprador, Long idAnuncio);
 }

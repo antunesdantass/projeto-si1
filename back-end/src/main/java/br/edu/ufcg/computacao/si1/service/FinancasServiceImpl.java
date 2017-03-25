@@ -5,14 +5,24 @@ import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Created by treinamento-huawei on 24/03/17.
+ * Created by adson_silva on 24/03/17.
  */
 public class FinancasServiceImpl implements FinancasService {
 
+    @Autowired
+    private UsuarioServiceImpl usuarioService;
+
+    @Autowired
+    private AnuncioServiceImpl anuncioService;
 
     @Override
-    public void efetuarCompra(Anuncio anuncio, Usuario vendedor, Usuario comprador) {
-            comprador.comprar(anuncio.getPreco());
-            vendedor.vender(anuncio.getPreco());
+    public void efetuarCompra(Long idComprador, Long idAnuncio) {
+        Anuncio anuncio = anuncioService.getById(idAnuncio);
+
+        Usuario comprador = usuarioService.getById(idComprador);
+        Usuario vendedor = usuarioService.getById(anuncio.getIdAutor());
+
+        comprador.comprar(anuncio.getPreco());
+        vendedor.vender(anuncio.getPreco());
     }
 }

@@ -16,16 +16,12 @@ import java.util.ArrayList;
 public class Financas {
 
     @Column
-    @NotNull
-    private double saldo;
+    private double saldo = 0;
 
     @Column
-    @NotNull
-    private ArrayList<String> extrato;
+    private ArrayList<String> extrato = new ArrayList<String>();
 
     public Financas(){
-        this.saldo = 0;
-        this.extrato = new ArrayList<String>();
     }
 
     public void creditar(double valor){
