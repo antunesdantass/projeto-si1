@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import br.edu.ufcg.computacao.si1.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,6 +22,7 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioServiceImpl usuarioService;
+
 
     @RequestMapping(
             method = RequestMethod.POST,
