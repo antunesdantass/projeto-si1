@@ -1,6 +1,6 @@
-angular.module('adExtreme').service("AuthenticationService", function($http, $localStorage, $window) {
+angular.module('adExtreme').service("AutenticacaoService", function($http, $localStorage, $location) {
 
-         this.Login = function(email, senha) {
+         this.login = function(email, senha) {
              usuario = {email : email, password : senha};
              var requisicao = {url : 'http://localhost:8080/login', method : 'POST', data : usuario};
              $http(requisicao).then(function successCallback(response) {
@@ -8,17 +8,17 @@ angular.module('adExtreme').service("AuthenticationService", function($http, $lo
                     var loggedUser = {email : response.data.email, token : response.data.token};
                     $localStorage.currentUser = loggedUser;
                     $http.defaults.headers.common.Authorization = 'x-auth-token ' + loggedUser.token;
-                    $window.location = "/";
+                    $location.path("#/");
                  }
              })
          };
 
-         this.Logout = function() {
+         this.logout = function() {
              delete $localStorage.currentUser;
              $http.defaults.headers.common.Authorization = '';
          };
 
-         this.isLogado = function() {
+         this.isLogged = function() {
              return $http.defaults.headers.common.Authorization !=  '';
          }
 });   

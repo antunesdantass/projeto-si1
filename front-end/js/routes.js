@@ -1,9 +1,11 @@
 angular.module('adExtreme').config(function ($routeProvider, $locationProvider) {
 
-    $locationProvider.html5Mode({
-            enabled: true,
-            requireBase: false
-    }),
+    // $locationProvider.html5Mode({
+    //     enabled: true,
+    //         // requireBase: false
+    // }),
+    // $locationProvider.html5Mode(true);
+    // $locationProvider.hashPrefix('')
 
     $routeProvider
         .when('/', {
@@ -45,5 +47,5 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider) 
             redirectTo: '/'
         });
 
-    //$locationProvider.hashPrefix('');
+    $locationProvider.hashPrefix('');
 });
