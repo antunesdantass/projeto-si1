@@ -1,5 +1,10 @@
 angular.module('adExtreme').config(function ($routeProvider, $locationProvider) {
 
+    $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+    }),
+
     $routeProvider
         .when('/', {
             templateUrl: 'views/anuncio/listar_anuncios.html',
@@ -40,5 +45,5 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider) 
             redirectTo: '/'
         });
 
-    $locationProvider.hashPrefix('');
+    //$locationProvider.hashPrefix('');
 });

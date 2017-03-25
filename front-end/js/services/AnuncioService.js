@@ -13,10 +13,7 @@ angular.module('adExtreme').service('AnuncioService', function ($resource) {
     };
 
     this.save = function (ad) {
-        // usar resource para dar post
-        // $scope.ad.date = new Date();
-        // $rootScope.anuncios.push($scope.ad);
-        // $scope.ad = {};
-        // $scope.ad.type = $scope.types[0];
+        ad['@type'] = 'movel';
+       Anuncio.save(ad);
     };
 });

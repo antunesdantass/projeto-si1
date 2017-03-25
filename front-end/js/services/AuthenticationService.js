@@ -11,5 +11,14 @@ angular.module('adExtreme').service("AuthenticationService", function($http, $lo
                     $window.location = "/";
                  }
              })
+         };
+
+         this.Logout = function() {
+             delete $localStorage.currentUser;
+             $http.defaults.headers.common.Authorization = '';
+         };
+
+         this.isLogado = function() {
+             return $http.defaults.headers.common.Authorization !=  '';
          }
 });   
