@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 import br.edu.ufcg.computacao.si1.model.usuario.JwtUser;
+import br.edu.ufcg.computacao.si1.model.usuario.LoggedUser;
 import br.edu.ufcg.computacao.si1.model.usuario.LoginUser;
 import br.edu.ufcg.computacao.si1.service.JwtService;
 import br.edu.ufcg.computacao.si1.service.UsuarioService;
@@ -25,13 +26,13 @@ public class LoginController {
     JwtService jwtService;
 
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody LoginUser usuario) {
+    public ResponseEntity<LoggedUser> login(@RequestBody LoginUser usuario) {
         if (usuarioService.authenticate(usuario.getEmail(), usuario.getPassword())) {
             JwtUser jwtUser = new JwtUser(usuario.getEmail(), usuario.getPassword());
-            String token = jwtService.getToken(jwtUser);
-            return new ResponseEntity<String>(token, HttpStatus.OK);
+            LoggedUser user = new LoggedUser(usuario.getEmail(), jwtService.getToken(jwtUser));
+            return new ResponseEntity<LoggedUser>(user, HttpStatus.OK);
         } else {
-            return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<LoggedUser>(HttpStatus.UNAUTHORIZED);
         }
     }
 

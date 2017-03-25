@@ -29,7 +29,7 @@ public class UsuarioController {
         return usuarioService.create(usuario);
     }
 
-    @RequestMapping(value = "/{id}",
+    @RequestMapping(value = "/id/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario findByID(@PathVariable("id") Long id) {
@@ -37,7 +37,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(
-            value = "/{email}",
+            value = "/email/{email}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario findByEmail(@PathVariable("email") String email){
