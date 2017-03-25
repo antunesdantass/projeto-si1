@@ -11,7 +11,6 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "tb_movel")
 public class Movel extends Anuncio {
 
     public Movel() { super(); }

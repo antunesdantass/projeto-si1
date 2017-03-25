@@ -10,13 +10,7 @@ import java.util.List;
  */
 public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
 
-    @Query("SELECT a FROM Anuncio a WHERE a.dtype = Emprego")
-    List<Anuncio> findAllOfEmprego();
-
-    @Query("SELECT a FROM Anuncio a WHERE a.dtype = Imovel")
-    List<Anuncio> findAllOfImovel();
-
-    @Query("SELECT a FROM Anuncio a WHERE a.dtype = Movel")
-    List<Anuncio> findAllOfMovel();
+    @Query("SELECT a FROM Anuncio a WHERE a.dtype = ?1")
+    List<Anuncio> findByType(String type);
 
 }

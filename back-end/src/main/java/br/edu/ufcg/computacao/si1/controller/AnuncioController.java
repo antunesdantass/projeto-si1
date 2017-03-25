@@ -4,6 +4,7 @@ import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.Emprego;
 import br.edu.ufcg.computacao.si1.model.anuncio.Imovel;
 import br.edu.ufcg.computacao.si1.model.anuncio.Movel;
+import br.edu.ufcg.computacao.si1.service.AnuncioCreator;
 import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ public class AnuncioController {
 
     @Autowired
     private AnuncioServiceImpl anuncioService;
+
+    @Autowired
+    private AnuncioCreator anuncioCreator;
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -45,8 +49,8 @@ public class AnuncioController {
     @RequestMapping(
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anuncio> create(@RequestBody Anuncio anuncio) {
-        Anuncio novoAnuncio = anuncioService.create(anuncio);
+    public ResponseEntity<Anuncio> create(@RequestBody Anuncio anuncio, @RequestHeader(value = "x-auth-token") String token) {
+        Anuncio novoAnuncio = anuncioCreator.create(anuncio, token);
         return new ResponseEntity<Anuncio>(anuncio, HttpStatus.CREATED);
     }
 

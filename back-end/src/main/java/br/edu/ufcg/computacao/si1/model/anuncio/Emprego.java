@@ -8,7 +8,6 @@ import java.util.Date;
  * Created by Antunes Dantas on 12/03/17.
  */
 @Entity
-@Table(name = "tb_emprego")
 public class Emprego extends Anuncio {
 
     public Emprego() { super(); }

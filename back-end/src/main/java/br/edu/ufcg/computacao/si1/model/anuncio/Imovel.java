@@ -8,7 +8,6 @@ import java.util.Date;
  * Created by dev on 12/03/17.
  */
 @Entity
-@Table(name = "tb_imovel")
 public class Imovel extends Anuncio {
 
     public Imovel () { super(); }

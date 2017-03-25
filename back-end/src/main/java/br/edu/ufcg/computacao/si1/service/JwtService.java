@@ -1,9 +1,11 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.usuario.JwtUser;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -14,8 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class JwtService
-{
+public class JwtService {
 
     @Value("${jwt.expire.hours}")
     private Long expireHours;
@@ -23,6 +24,9 @@ public class JwtService
     @Value("${jwt.token.secret}")
     private String plainSecret;
     private String encodedSecret;
+
+    @Autowired
+    UsuarioService usuarioService;
 
     @PostConstruct
     protected void init() {
@@ -82,5 +86,11 @@ public class JwtService
     public String getToken(JwtUser jwtUser)
     {
         return getToken(this.encodedSecret, jwtUser);
+    }
+
+    public Usuario getUsuario(String token) {
+        JwtUser jwtUser = this.getUser(token);
+        Usuario usuario =  usuarioService.getByEmail(jwtUser.getEmail());
+        return usuario;
     }
 }

@@ -11,7 +11,7 @@ import java.util.Optional;
  */
 public interface AnuncioService {
 
-    Anuncio create(Anuncio anuncio);
+    Anuncio create(Anuncio anuncio, String token);
 
     Anuncio getById(Long id);
 

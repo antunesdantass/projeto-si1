@@ -1,6 +1,8 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.Emprego;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +14,29 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Created by Marcus Oliveira on 28/12/16.
+ * Created by Antunes Dantas.
  */
 @Service
 public class AnuncioServiceImpl implements AnuncioService {
 
+    @Autowired
     private AnuncioRepository anuncioRepository;
 
     @Autowired
-    public AnuncioServiceImpl(AnuncioRepository anuncioRepository) {
+    private UsuarioService usuarioService;
+
+    public AnuncioServiceImpl(AnuncioRepository anuncioRepository, UsuarioService usuarioService) {
         this.anuncioRepository = anuncioRepository;
+        this.usuarioService = usuarioService;
     }
 
     @Override
-    public Anuncio create(Anuncio anuncio) {
-        return anuncioRepository.save(anuncio);
+    public Anuncio create(Anuncio anuncio, String token) {
+//        if (anuncio instanceof Emprego) {
+//            Usuario usuario = usuarioService.get
+//            if ()
+//        }
+        return null;
     }
 
     @Override
@@ -36,15 +46,7 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Override
     public List<Anuncio> getByTipo(String tipo) {
-        if (tipo.equalsIgnoreCase("emprego")) {
-            return anuncioRepository.findAllOfEmprego();
-        } else if (tipo.equalsIgnoreCase("movel")) {
-            return anuncioRepository.findAllOfMovel();
-        } else if (tipo.equalsIgnoreCase("imovel")) {
-            return anuncioRepository.findAllOfImovel();
-        } else {
-            return null;
-        }
+        return anuncioRepository.findByType(tipo);
     }
 
     @Override

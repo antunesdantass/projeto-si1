@@ -30,7 +30,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public Usuario getByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        return usuario;
     }
 
     @Override

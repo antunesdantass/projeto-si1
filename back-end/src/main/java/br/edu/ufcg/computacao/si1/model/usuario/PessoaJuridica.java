@@ -11,7 +11,6 @@ import javax.persistence.Table;
  * Created by adson_silva on 12/03/17.
  */
 @Entity
-@Table
 public class PessoaJuridica extends Usuario {
 
     public PessoaJuridica(String nome, String email, String senha){

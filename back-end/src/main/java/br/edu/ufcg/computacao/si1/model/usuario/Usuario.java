@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -9,6 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
