@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Usuario")
@@ -47,14 +48,20 @@ public abstract class Usuario {
     @Column
     private Financas financas;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Anuncio> anuncios;
+
     public Usuario(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.financas = new Financas();
+        this.anuncios = new HashSet<Anuncio>();
     }
 
-    public Usuario() {}
+    public Usuario() {
+        this.anuncios = new HashSet<Anuncio>();
+    }
 
     public Long getId() {
         return id;
@@ -94,6 +101,22 @@ public abstract class Usuario {
 
     public void vender(double valor){
         financas.creditar(valor);
+    }
+
+    public Set<Anuncio> getAnuncios() {
+        return anuncios;
+    }
+
+    public void setAnuncios(Set<Anuncio> anuncios) {
+        this.anuncios = anuncios;
+    }
+
+    public void addAnuncio(Anuncio anuncio) {
+        this.anuncios.add(anuncio);
+    }
+
+    public void removeAnuncio(Anuncio anuncio) {
+        this.anuncios.remove(anuncio);
     }
 
     @Override

@@ -2,9 +2,7 @@ package br.edu.ufcg.computacao.si1.model.usuario;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
@@ -14,6 +12,10 @@ import java.util.ArrayList;
 @Entity(name = "Financas")
 @Table(name = "tb_financas")
 public class Financas {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column
     private double saldo = 0;
@@ -48,5 +50,11 @@ public class Financas {
 
     public void setExtrato(ArrayList<String> extrato) {
         this.extrato = extrato;
+    }
+
+    public Long getId() { return this.id; }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

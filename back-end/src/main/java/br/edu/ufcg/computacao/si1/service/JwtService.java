@@ -27,7 +27,7 @@ public class JwtService {
     private String encodedSecret;
 
     @Autowired
-    UsuarioService usuarioService;
+    UsuarioServiceImpl usuarioService;
 
     @PostConstruct
     protected void init() {

@@ -20,7 +20,7 @@ public class FinancasServiceImpl implements FinancasService {
         Anuncio anuncio = anuncioService.getById(idAnuncio);
 
         Usuario comprador = usuarioService.getById(idComprador);
-        Usuario vendedor = usuarioService.getById(anuncio.getIdAutor());
+        Usuario vendedor = anuncio.getUsuario();
 
         comprador.comprar(anuncio.getPreco());
         vendedor.vender(anuncio.getPreco());

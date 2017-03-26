@@ -6,7 +6,7 @@ package br.edu.ufcg.computacao.si1.exception;
 public class UserNotAllowedExcepetion extends Exception {
 
     public UserNotAllowedExcepetion() {
-        super("Apenas Pessoa Jurídica pode criar anúncio de emprego.");
+        super("Apenas Pessoa Jurídica pode criar anúncio de emprego e serviço.");
     }
 
     public UserNotAllowedExcepetion(String message) {
