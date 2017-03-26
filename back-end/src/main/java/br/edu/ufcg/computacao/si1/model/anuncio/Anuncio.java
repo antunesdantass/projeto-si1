@@ -3,6 +3,7 @@ package br.edu.ufcg.computacao.si1.model.anuncio;
 import br.edu.ufcg.computacao.si1.model.Nota;
 import br.edu.ufcg.computacao.si1.model.usuario.PessoaFisica;
 import br.edu.ufcg.computacao.si1.model.usuario.PessoaJuridica;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -36,8 +37,9 @@ public abstract class Anuncio {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column
-    private Long idAutor;
+    @JoinColumn(name = "usuario_id")
+    @ManyToOne
+    private Usuario usuario;
 
     @NotNull(message = "O titulo não pode ser nulo.")
     @NotEmpty(message = "O titulo não pode esta vazio.")
@@ -105,12 +107,10 @@ public abstract class Anuncio {
         this.nota = nota;
     }
 
-    public Long getIdAutor() {
-        return idAutor;
-    }
+    public Usuario getUsuario() { return this.usuario; }
 
-    public void setIdAutor(Long idAutor) {
-        this.idAutor = idAutor;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

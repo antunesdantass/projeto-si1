@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.service;
 
+import br.edu.ufcg.computacao.si1.exception.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.model.usuario.JwtUser;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import io.jsonwebtoken.Claims;
@@ -88,9 +89,12 @@ public class JwtService {
         return getToken(this.encodedSecret, jwtUser);
     }
 
-    public Usuario getUsuario(String token) {
+    public Usuario getUsuario(String token) throws UserNotFoundException {
         JwtUser jwtUser = this.getUser(token);
         Usuario usuario =  usuarioService.getByEmail(jwtUser.getEmail());
+        if (usuario == null) {
+            throw new UserNotFoundException();
+        }
         return usuario;
     }
 }
