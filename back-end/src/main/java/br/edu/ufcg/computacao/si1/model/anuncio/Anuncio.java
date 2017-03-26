@@ -22,7 +22,8 @@ import java.util.Date;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Emprego.class, name = "emprego"),
         @JsonSubTypes.Type(value = Imovel.class, name = "imovel"),
-        @JsonSubTypes.Type(value = Movel.class, name = "movel")}
+        @JsonSubTypes.Type(value = Movel.class, name = "movel"),
+        @JsonSubTypes.Type(value = Servico.class, name = "servico")}
 )
 public abstract class Anuncio {
 

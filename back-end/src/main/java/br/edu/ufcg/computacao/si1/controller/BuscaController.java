@@ -46,4 +46,12 @@ public class BuscaController {
         return new ResponseEntity<List<Anuncio>>(resultado, HttpStatus.OK);
     }
 
+    @RequestMapping(
+            value = "/tipo/{tipo}",
+            method = RequestMethod.GET
+    )
+    public List<Anuncio> getByTipo(@RequestParam("tipo") String tipo) {
+        return buscaService.getByTipo(tipo);
+    }
+
 }

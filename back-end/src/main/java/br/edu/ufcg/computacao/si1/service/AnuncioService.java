@@ -11,11 +11,7 @@ import java.util.Optional;
  */
 public interface AnuncioService {
 
-    Anuncio create(Anuncio anuncio, String token);
-
     Anuncio getById(Long id);
-
-    List<Anuncio> getByTipo(String tipo);
 
     List<Anuncio> findAll();
 

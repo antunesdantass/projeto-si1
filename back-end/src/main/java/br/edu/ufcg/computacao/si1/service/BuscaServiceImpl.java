@@ -32,4 +32,8 @@ public class BuscaServiceImpl implements BuscaService {
         return anuncioRepository.findByDataDeCriacaoBetween(initialDate, finalDate);
     }
 
+    public List<Anuncio> getByTipo(String tipo) {
+        return anuncioRepository.findByType(tipo);
+    }
+
 }

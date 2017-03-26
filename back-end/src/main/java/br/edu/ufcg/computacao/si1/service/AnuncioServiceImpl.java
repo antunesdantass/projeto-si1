@@ -31,22 +31,8 @@ public class AnuncioServiceImpl implements AnuncioService {
     }
 
     @Override
-    public Anuncio create(Anuncio anuncio, String token) {
-//        if (anuncio instanceof Emprego) {
-//            Usuario usuario = usuarioService.get
-//            if ()
-//        }
-        return null;
-    }
-
-    @Override
     public Anuncio getById(Long id) {
         return anuncioRepository.findOne(id);
-    }
-
-    @Override
-    public List<Anuncio> getByTipo(String tipo) {
-        return anuncioRepository.findByType(tipo);
     }
 
     @Override

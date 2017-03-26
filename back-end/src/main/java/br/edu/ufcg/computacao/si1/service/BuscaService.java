@@ -16,4 +16,6 @@ public interface BuscaService {
 
     List<Anuncio> filterByDate(Date inicialDate, Date finalDate);
 
+    List<Anuncio> getByTipo(String tipo);
+
 }
