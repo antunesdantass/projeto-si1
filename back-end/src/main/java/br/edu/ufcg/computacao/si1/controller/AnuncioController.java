@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.controller;
 
+import br.edu.ufcg.computacao.si1.exception.UserNotAllowedExcepetion;
+import br.edu.ufcg.computacao.si1.exception.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.Emprego;
 import br.edu.ufcg.computacao.si1.model.anuncio.Imovel;
@@ -50,8 +52,14 @@ public class AnuncioController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Anuncio> create(@RequestBody Anuncio anuncio, @RequestHeader(value = "x-auth-token") String token) {
-        Anuncio novoAnuncio = anuncioCreator.create(anuncio, token);
-        return new ResponseEntity<Anuncio>(anuncio, HttpStatus.CREATED);
+        try {
+            Anuncio novoAnuncio = anuncioCreator.create(anuncio, token);
+            return new ResponseEntity<Anuncio>(anuncio, HttpStatus.CREATED);
+        } catch (UserNotAllowedExcepetion e) {
+            return new ResponseEntity<Anuncio>(HttpStatus.FORBIDDEN);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<Anuncio>(HttpStatus.UNAUTHORIZED);
+        }
     }
 
 }
