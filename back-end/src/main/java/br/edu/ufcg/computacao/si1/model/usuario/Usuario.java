@@ -45,7 +45,7 @@ public abstract class Usuario {
     @Column
     private String senha;
 
-    @Column
+    @OneToOne
     private Financas financas;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
