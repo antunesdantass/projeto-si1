@@ -24,5 +24,9 @@ public class FinancasServiceImpl implements FinancasService {
 
         comprador.comprar(anuncio.getPreco());
         vendedor.vender(anuncio.getPreco());
+
+        vendedor.getAnuncios().remove(anuncio);
+        anuncioService.delete(anuncio.getId());
+        usuarioService.update(vendedor);
     }
 }
