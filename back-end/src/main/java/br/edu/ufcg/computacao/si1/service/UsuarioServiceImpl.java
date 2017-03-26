@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.service;
 
+import br.edu.ufcg.computacao.si1.exception.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.model.usuario.PessoaFisica;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
@@ -30,9 +31,13 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Usuario getByEmail(String email) {
+    public Usuario getByEmail(String email) throws UserNotFoundException {
         Usuario usuario = usuarioRepository.findByEmail(email);
-        return usuario;
+        if (usuario == null) {
+            throw new UserNotFoundException();
+        } else {
+            return usuario;
+        }
     }
 
     @Override

@@ -1,10 +1,13 @@
 package br.edu.ufcg.computacao.si1.controller;
 
+import br.edu.ufcg.computacao.si1.exception.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import br.edu.ufcg.computacao.si1.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.attribute.standard.Media;
@@ -42,8 +45,12 @@ public class UsuarioController {
             value = "/email/{email}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Usuario findByEmail(@PathVariable("email") String email){
-        return usuarioService.getByEmail(email);
+    public ResponseEntity<Usuario> findByEmail(@PathVariable("email") String email){
+        try {
+            return new ResponseEntity<Usuario>(usuarioService.getByEmail(email), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(
