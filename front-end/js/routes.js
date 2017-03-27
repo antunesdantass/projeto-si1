@@ -1,11 +1,13 @@
-angular.module('adExtreme').config(function ($routeProvider, $locationProvider) {
+angular.module('adExtreme').config(function ($routeProvider, $locationProvider, $httpProvider) {
 
     // $locationProvider.html5Mode({
     //     enabled: true,
-    //         // requireBase: false
-    // }),
-    // $locationProvider.html5Mode(true);
-    // $locationProvider.hashPrefix('')
+    //     requireBase: false
+    // });
+
+    $httpProvider.interceptors.push('httpErrorResponseInterceptor');
+    $locationProvider.html5Mode(true);
+    // $locationProvider.hashPrefix('');
 
     $routeProvider
         .when('/', {
@@ -43,9 +45,18 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider) 
             controller: 'ComprarController',
             authorize : true
         })
+        .when('/404', {
+            templateUrl: 'views/error/404.html'
+        })
+        .when('/401', {
+            templateUrl: 'views/error/401.html'
+        })
+        .when('/500', {
+            templateUrl: 'views/error/500.html'
+        })
         .otherwise({
             redirectTo: '/'
         });
 
-    $locationProvider.hashPrefix('');
+    // $locationProvider.hashPrefix('');
 });
