@@ -42,9 +42,9 @@ public abstract class Anuncio {
     @ManyToOne
     private Usuario usuario;
 
-    @NotNull(message = "O titulo não pode ser nulo.")
-    @NotEmpty(message = "O titulo não pode esta vazio.")
-    @Size(min = 10, max = 100, message = "O titulo deve ter entre 2 e 100 caracters")
+    @NotNull(message = "O título não pode ser nulo.")
+    @NotEmpty(message = "O título não pode estar vazio.")
+    @Size(min = 10, max = 100, message = "O título deve ter entre 2 e 100 caracteres")
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
@@ -52,7 +52,7 @@ public abstract class Anuncio {
     @JsonFormat(pattern = "dd-MMM-yyyy HH:mm:ss")
     private Date dataDeCriacao;
 
-    @NotNull(message = "O preçço não pode ser nulo.")
+    @NotNull(message = "O preço não pode ser nulo.")
     @DecimalMin(value = "0.1", message = "O preço minimo é 0.1 para um anúncio.")
     @Column(name = "preco", nullable = false)
     private double preco;
