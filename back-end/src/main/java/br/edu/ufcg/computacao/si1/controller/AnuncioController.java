@@ -1,11 +1,8 @@
 package br.edu.ufcg.computacao.si1.controller;
 
-import br.edu.ufcg.computacao.si1.exception.UserNotAllowedExcepetion;
+import br.edu.ufcg.computacao.si1.exception.UserNotAllowedException;
 import br.edu.ufcg.computacao.si1.exception.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
-import br.edu.ufcg.computacao.si1.model.anuncio.Emprego;
-import br.edu.ufcg.computacao.si1.model.anuncio.Imovel;
-import br.edu.ufcg.computacao.si1.model.anuncio.Movel;
 import br.edu.ufcg.computacao.si1.service.AnuncioCreator;
 import br.edu.ufcg.computacao.si1.service.AnuncioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
-import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -55,7 +51,7 @@ public class AnuncioController {
         try {
             Anuncio novoAnuncio = anuncioCreator.create(anuncio, token);
             return new ResponseEntity<Anuncio>(anuncio, HttpStatus.CREATED);
-        } catch (UserNotAllowedExcepetion e) {
+        } catch (UserNotAllowedException e) {
             return new ResponseEntity<Anuncio>(HttpStatus.FORBIDDEN);
         } catch (UserNotFoundException e) {
             return new ResponseEntity<Anuncio>(HttpStatus.UNAUTHORIZED);
