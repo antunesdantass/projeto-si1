@@ -19,7 +19,6 @@ import java.util.Optional;
  * Created by adson_silva on 12/03/17.
  */
 @CrossOrigin
-@RequestMapping("ad-extreme/usuario")
 @RestController
 public class UsuarioController {
 
@@ -28,13 +27,14 @@ public class UsuarioController {
 
 
     @RequestMapping(
+            value = "ad-extreme/cadastrar/usuario",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario create(@RequestBody Usuario usuario){
         return usuarioService.create(usuario);
     }
 
-    @RequestMapping(value = "/id/{id}",
+    @RequestMapping(value = "ad-extreme/usuario/id/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario findByID(@PathVariable("id") Long id) {
@@ -42,7 +42,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(
-            value = "/email/{email}",
+            value = "ad-extreme/usuario/email/{email}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> findByEmail(@PathVariable("email") String email){
@@ -54,6 +54,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(
+            value = "ad-extreme/usuario",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Usuario> getAll(){
@@ -61,7 +62,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(
-            value = "/{id}",
+            value = "ad-extreme/usuario/id/{id}",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario update(@PathVariable("id") Long id, @RequestBody Usuario usuario) {
@@ -73,7 +74,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(
-            value="/{id}",
+            value="ad-extreme/usuario/{id}",
             method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
         usuarioService.delete(id);
