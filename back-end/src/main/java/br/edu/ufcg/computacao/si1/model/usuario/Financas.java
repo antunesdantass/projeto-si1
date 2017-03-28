@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  */
 @Entity(name = "Financas")
 @Table(name = "tb_financas")
-public class Financas {
+public class Financas implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -22,6 +22,9 @@ public class AnuncioCreatorImpl implements AnuncioCreator {
     JwtService jwtService;
 
     @Autowired
+    UsuarioService usuarioService;
+
+    @Autowired
     AnuncioRepository anuncioRepository;
 
     public Anuncio create(Anuncio anuncio, String token) throws UserNotAllowedException, UserNotFoundException {
@@ -30,6 +33,7 @@ public class AnuncioCreatorImpl implements AnuncioCreator {
             if (usuario instanceof PessoaJuridica) {
                 anuncio.setUsuario(usuario);
                 usuario.addAnuncio(anuncio);
+                usuarioService.update(usuario);
                 return anuncioRepository.save(anuncio);
             } else {
                 throw new UserNotAllowedException();
@@ -37,6 +41,7 @@ public class AnuncioCreatorImpl implements AnuncioCreator {
         } else {
             anuncio.setUsuario(usuario);
             usuario.addAnuncio(anuncio);
+            usuarioService.update(usuario);
             return anuncioRepository.save(anuncio);
         }
     }
