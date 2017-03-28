@@ -20,12 +20,12 @@ angular.module('adExtreme').service("AutenticacaoService", function($http, $loca
                     $http.defaults.headers.common.Authorization = 'x-auth-token ' + loggedUser.token;
                     $location.path("/");
                     setRootUser(loggedUser.email);
-                    toastr.success('Sucesso.', 'Logado com sucesso.');
+                    toastr.success('Logado com sucesso.','Sucesso.');
                 }
             })
             .catch(function (error) {
                 console.log(error);
-                toastr.error('Erro', 'Não foi possível logar.')
+                toastr.error('Usuario e/ou senha incorretos.', 'Erro')
             });
     };
 

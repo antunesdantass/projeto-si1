@@ -14,7 +14,7 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
             templateUrl: 'views/anuncio/listar_anuncios.html',
             controller: 'AnuncioController'
         })
-        .when('/anuncio', {
+        .when('/anuncio/:id', {
             templateUrl: 'views/anuncio/criar_anuncio.html',
             controller: 'AnuncioController',
             requiredAuth: true
@@ -30,12 +30,12 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
         .when('/conta', {
             templateUrl: 'views/usuario/conta.html',
             controller: 'UsuarioController',
-            // requiredAuth: true
+            requiredAuth: true
         })
-        .when('/comprar_anuncio', {
+        .when('/comprar_anuncio/:id', {
             templateUrl: 'views/anuncio/comprar_anuncio.html',
             controller: 'AnuncioController',
-            // requiredAuth: true
+            requiredAuth: true
         })
         .when('/404', {
             templateUrl: 'views/error/404.html'

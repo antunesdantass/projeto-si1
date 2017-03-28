@@ -16,10 +16,11 @@
 				<li ng-hide="isLogged()"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 
 				<li ng-show="isLogged()"><a href="/anuncio"><span class="glyphicon glyphicon-plus"></span> Cadastrar Anúncio</a></li>
+				<li ng-show="isLogged()"><a>{{currentUser.financas.saldo | currency: 'R$ '}}</a></li>
 				<li ng ng-show="isLogged()" class="dropdown">
 					<a data-toggle="dropdown">{{currentUser.nome}} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/conta">Minha conta</a></li>
+						<li><a href="/conta"><span class=""></span>Minha conta</a></li>
 						<li><a href="/" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					</ul>
 				</li>
