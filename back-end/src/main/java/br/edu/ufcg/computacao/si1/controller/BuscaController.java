@@ -2,12 +2,14 @@ package br.edu.ufcg.computacao.si1.controller;
 
 import br.edu.ufcg.computacao.si1.exception.UserNotFoundException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.BuscaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.GET;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;

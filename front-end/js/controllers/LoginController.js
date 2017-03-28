@@ -3,10 +3,11 @@ angular.module('adExtreme').controller('LoginController', function ($scope, $htt
     $scope.user = {
         email: '',
         password: ''
-    },
+    };
 
     $scope.login = function () {
         AutenticacaoService.login($scope.user);
+        delete $scope.user;
     }
    
 });

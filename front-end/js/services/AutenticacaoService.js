@@ -1,29 +1,40 @@
-angular.module('adExtreme').service("AutenticacaoService", function($http, $localStorage, $location, toastr) {
+angular.module('adExtreme').service("AutenticacaoService", function($http, $localStorage, $location, toastr, $rootScope) {
 
-         this.login = function(user) {
-             var req = {url : 'http://localhost:8080/login', method : 'POST', data : user};
-             $http(req)
-                 .then(function successCallback(response) {
-                     if (response.data.token) {
-                        var loggedUser = {email : response.data.email, token : response.data.token};
-                        $localStorage.currentUser = loggedUser;
-                        $http.defaults.headers.common.Authorization = 'x-auth-token ' + loggedUser.token;
-                        $location.path("#/");
-                        toastr.success('Sucesso.', 'Logado com sucesso.');
-                     }
-                 })
-                 .catch(function (error) {
-                     console.log(error);
-                     toastr.error('Erro', 'Não foi possível logar.')
-                 });
-         };
+    function setRootUser(userEmail) {
+        var url = 'http://localhost:8080/ad-extreme/usuario/email/' + userEmail + '/';
+        $http.get(url)
+            .then(function (res) {
+                $rootScope.user = res.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+    }
 
-         this.logout = function() {
-             delete $localStorage.currentUser;
-             $http.defaults.headers.common.Authorization = '';
-         };
+    this.login = function(user) {
+        var req = {url : 'http://localhost:8080/login', method : 'POST', data : user};
+        $http(req)
+            .then(function successCallback(response) {
+                if (response.data.token) {
+                    var loggedUser = {email : response.data.email, token : response.data.token};
+                    setRootUser(loggedUser.email);
+                    $localStorage.currentUser = loggedUser;
+                    $http.defaults.headers.common.Authorization = 'x-auth-token ' + loggedUser.token;
+                    $location.path("#/");
+                    toastr.success('Sucesso.', 'Logado com sucesso.');
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+                toastr.error('Erro', 'Não foi possível logar.')
+            });
+    };
 
-         this.isLogged = function() {
-             return $http.defaults.headers.common.Authorization != null && $http.defaults.headers.common.Authorization !=  '';
-         }
+    this.logout = function() {
+        delete $localStorage.currentUser;
+        $http.defaults.headers.common.Authorization = '';
+    };
+
+    this.isLogged = function() {
+        return $http.defaults.headers.common.Authorization != null && $http.defaults.headers.common.Authorization !=  '';
+    }
 });   

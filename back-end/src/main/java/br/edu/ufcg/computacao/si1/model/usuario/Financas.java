@@ -18,12 +18,14 @@ public class Financas {
     private Long id;
 
     @Column
-    private double saldo = 0;
+    private double saldo;
 
     @Column
-    private ArrayList<String> extrato = new ArrayList<String>();
+    private ArrayList<String> extrato;
 
     public Financas(){
+        this.saldo = saldo;
+        this.extrato = new ArrayList<String>();
     }
 
     public void creditar(double valor){

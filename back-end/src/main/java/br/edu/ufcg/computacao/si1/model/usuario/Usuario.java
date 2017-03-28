@@ -45,7 +45,7 @@ public abstract class Usuario {
     @Column
     private String senha;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Financas financas;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -60,6 +60,7 @@ public abstract class Usuario {
     }
 
     public Usuario() {
+        this.financas = new Financas();
         this.anuncios = new HashSet<Anuncio>();
     }
 
@@ -117,6 +118,10 @@ public abstract class Usuario {
 
     public void removeAnuncio(Anuncio anuncio) {
         this.anuncios.remove(anuncio);
+    }
+
+    public Financas getFinancas(){
+        return this.financas;
     }
 
     @Override
