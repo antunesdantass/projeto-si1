@@ -1,0 +1,21 @@
+<div class="page-header">Comprar</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-4">
+                {{anuncio.titulo}}
+            </div>
+            <div class="col-xs-2">
+                {{anuncio['@type']}}
+            </div>
+            <div class="col-xs-3">
+                {{anuncio.dataDeCriacao | date: 'dd/MM/yyyy'}}
+            </div>
+            <div class="col-xs-3">
+                {{anuncio.preco | currency: 'R$ '}}
+            </div>
+        </div>
+    </div>
+</div>
+<input type="datetime" class="form-control" ng-model="executionDate" ng-show="anuncio['@type'] == 'servico'">
+<button type="button" class="btn btn-warning">Comprar</button>

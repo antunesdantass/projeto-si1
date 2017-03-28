@@ -16,10 +16,10 @@ angular.module('adExtreme').service("AutenticacaoService", function($http, $loca
             .then(function successCallback(response) {
                 if (response.data.token) {
                     var loggedUser = {email : response.data.email, token : response.data.token};
-                    setRootUser(loggedUser.email);
                     $localStorage.currentUser = loggedUser;
                     $http.defaults.headers.common.Authorization = 'x-auth-token ' + loggedUser.token;
                     $location.path("/");
+                    setRootUser(loggedUser.email);
                     toastr.success('Sucesso.', 'Logado com sucesso.');
                 }
             })

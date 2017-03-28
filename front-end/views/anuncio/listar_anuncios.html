@@ -1,22 +1,49 @@
 <div class="page-header">
     <h3>Anúncios</h3>
 </div>
+<form class="form-inline" ng-submit="getAds()">
+    <div class="row">
+        <b class="col-xs-2">Filtrar por </b>
+        <select class="form-control col-xs-2" ng-model="filter">
+            <option value="date">Data</option>
+            <option value="type">Tipo</option>
+        </select>
+        <!--<div class="form-group col-xs-2">-->
+            <!--<label for="dateFilter">Data</label>-->
+            <!--<input type="radio" id="dateFilter" name="filter" ng-model="filter" value="date">-->
+        <!--</div>-->
+        <!--<div class="form-group col-xs-2">-->
+            <!--<label for="typeFilter">Tipo</label>-->
+            <!--<input type="radio" id="typeFilter" name="filter" ng-model="filter" value="type">-->
+        <!--</div>-->
+
+        <div ng-show="filter == 'date'" class="col-xs-6">
+            <input type="date" class="form-control" ng-model="date1">
+            <input type="date" class="form-control" ng-model="date2">
+        </div>
+        <div ng-show="filter == 'type'" class="col-xs-6">
+            <select ng-model="type" class="form-control">
+                <option ng-repeat="type in allTypes" value="{{type}}">{{type}}</option>
+            </select>
+        </div>
+    </div>
+</form>
 <div ng-show="ads.length">
     <div ng-repeat="anuncio in ads">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-4">
-                        {{anuncio.title}}
+                        {{anuncio.titulo}}
                     </div>
                     <div class="col-xs-2">
-                        {{anuncio.type}}
+                        {{anuncio['@type']}}
                     </div>
                     <div class="col-xs-3">
-                        {{anuncio.date | date: 'dd/MM/yyyy'}}
+                        {{anuncio.dataDeCriacao | date: 'dd/MM/yyyy'}}
                     </div>
                     <div class="col-xs-3">
-                        {{anuncio.price | currency: 'R$ '}}
+                        {{anuncio.preco | currency: 'R$ '}}
                     </div>
                 </div>
             </div>

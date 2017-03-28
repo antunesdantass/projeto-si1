@@ -16,7 +16,8 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
         })
         .when('/anuncio', {
             templateUrl: 'views/anuncio/criar_anuncio.html',
-            controller: 'AnuncioController'
+            controller: 'AnuncioController',
+            requiredAuth: true
         })
         .when('/login', {
             templateUrl: 'views/autenticacao/login.html',
@@ -28,11 +29,13 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
         })
         .when('/conta', {
             templateUrl: 'views/usuario/conta.html',
-            controller: 'UsuarioController'
+            controller: 'UsuarioController',
+            requiredAuth: true
         })
-        .when('/anuncio/comprar', {
-            templateUrl: 'view de comprar',
-            controller: 'ComprarController'
+        .when('/comprar_anuncio', {
+            templateUrl: 'views/anuncio/comprar_anuncio.html',
+            controller: 'AnuncioController',
+            requiredAuth: true
         })
         .when('/404', {
             templateUrl: 'views/error/404.html'
@@ -47,5 +50,11 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
             redirectTo: '/404'
         });
 
-    // $locationProvider.hashPrefix('');
+})
+.run(function ($rootScope, $location) {
+    $rootScope.$on('$routeChangeStart', function (angularEvent, newUrl) {
+        if (newUrl.requiredAuth && !$rootScope.isLogged()) {
+            $location.path('/login');
+        }
+    })
 });

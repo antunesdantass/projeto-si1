@@ -3,7 +3,7 @@
 
 	<div class="form-group">
 		<label for="nome">Nome</label>
-		<input type="text" class="form-control" id="nome" placeholder="Nome" ng-model="user.nome" required>
+		<input type="text" class="form-control" id="nome" placeholder="Nome" ng-model="user.nome" min="2" max="100" required>
 	</div>
 	<div class="form-group">
 		<label for="email" >Email</label>
@@ -11,7 +11,7 @@
 	</div>
 	<div class="form-group">
 		<label for="senha">Senha</label>
-		<input type="password" class="form-control" id="senha" placeholder="Senha" ng-model="pass1" required>
+		<input type="password" class="form-control" id="senha" placeholder="Senha" ng-model="pass1" min="4" max="16" required>
 	</div>
 	<div class="form-group">
 		<label for="confirmPassword">Repetir senha</label>
