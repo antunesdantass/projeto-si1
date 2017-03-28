@@ -38,8 +38,8 @@ public abstract class Anuncio {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @JoinColumn(name = "usuario_id")
     @ManyToOne
+    @JsonIgnore
     private Usuario usuario;
 
     @NotNull(message = "O título não pode ser nulo.")

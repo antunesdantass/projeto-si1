@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = { "/ad-extreme/anuncio/*/comprar", "/ad-extreme/usuario" })
+@WebFilter(urlPatterns = { "/ad-extreme/anuncio/*/comprar", "/ad-extreme/usuario", "/ad-extreme/usuario/*" })
 public class JwtFilter implements Filter
 {
 
