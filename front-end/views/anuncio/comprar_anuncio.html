@@ -3,19 +3,19 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-xs-4">
-                {{anuncio.titulo}}
+                {{adBuy.titulo}}
             </div>
             <div class="col-xs-2">
-                {{anuncio['@type']}}
+                {{adBuy['@type']}}
             </div>
             <div class="col-xs-3">
-                {{anuncio.dataDeCriacao | date: 'dd/MM/yyyy'}}
+                {{adBuy.dataDeCriacao | date: 'dd/MM/yyyy'}}
             </div>
             <div class="col-xs-3">
-                {{anuncio.preco | currency: 'R$ '}}
+                {{adBuy.preco | currency: 'R$ '}}
             </div>
         </div>
     </div>
 </div>
-<input type="datetime" class="form-control" ng-model="executionDate" ng-show="anuncio['@type'] == 'servico'">
-<button type="button" class="btn btn-warning">Comprar</button>
+<input type="datetime" class="form-control" ng-model="adBuy.dataDeExecucao" ng-show="adBuy['@type'] == 'servico'">
+<button type="submit" class="btn btn-warning" ng-click="buy()">Comprar</button>

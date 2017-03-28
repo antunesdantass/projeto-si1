@@ -10,27 +10,30 @@
 
 <div class="divider"></div>
 
-<div ng-show="currentUser.">
-
-</div>
 <h3>Meus anúncios</h3>
-<table>
-    <thead>
+
+<div ng-show="currentUser.anuncios.length" class="table-responsive">
+    <table class="table">
+        <thead>
         <tr>
-            <th>Titulo</th>
-            <th>Preco</th>
-            <th>Tipo</th>
-            <th>Editar</th>
-            <th>Remover</th>
+            <th align="center" style="min-width: 200px">Titulo</th>
+            <th align="center" width="100px">Preco</th>
+            <th align="center" width="80px">Tipo</th>
+            <th align="center" width="50px">Editar</th>
+            <th align="center" width="50px">Remover</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         <tr ng-repeat="ad in currentUser.anuncios">
             <td>{{ad.titulo}}</td>
-            <td>{{ad.preco}}</td>
+            <td>{{ad.preco | currency: 'R$ '}}</td>
             <td>{{ad['@type']}}</td>
-            <td><a>Editar</a></td>
-            <td><a>Remover</a></td>
+            <td align="center"><a><span class="glyphicon glyphicon-edit"></span></a></td>
+            <td align="center"><a><span class="glyphicon glyphicon-remove"></span></a></td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
+<div ng-hide="currentUser.anuncios.length">
+    <p>Não há anúncios cadastrados.</p>
+</div>

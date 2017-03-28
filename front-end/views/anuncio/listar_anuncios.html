@@ -8,28 +8,29 @@
             <option value="date">Data</option>
             <option value="type">Tipo</option>
         </select>
-        <!--<div class="form-group col-xs-2">-->
-            <!--<label for="dateFilter">Data</label>-->
-            <!--<input type="radio" id="dateFilter" name="filter" ng-model="filter" value="date">-->
-        <!--</div>-->
-        <!--<div class="form-group col-xs-2">-->
-            <!--<label for="typeFilter">Tipo</label>-->
-            <!--<input type="radio" id="typeFilter" name="filter" ng-model="filter" value="type">-->
-        <!--</div>-->
 
-        <div ng-show="filter == 'date'" class="col-xs-6">
-            <input type="date" class="form-control" ng-model="date1">
-            <input type="date" class="form-control" ng-model="date2">
+        <div ng-show="filter == 'date'" class="col-xs-4">
+            <div class="form-group">
+                <label for="dateFromFilter">De</label>
+                <input type="date" id="dateFromFilter" class="form-control" ng-model="date1">
+            </div>
+            <div class="form-group">
+                <label for="dateToFilter">Até</label>
+                <input type="date" id="dateToFilter" class="form-control" ng-model="date2">
+            </div>
         </div>
-        <div ng-show="filter == 'type'" class="col-xs-6">
+        <div ng-show="filter == 'type'" class="col-xs-3">
             <select ng-model="type" class="form-control">
                 <option ng-repeat="type in allTypes" value="{{type}}">{{type}}</option>
             </select>
         </div>
+        <div class="col-xs-3">
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </div>
     </div>
 </form>
-<div ng-show="ads.length">
-    <div ng-repeat="anuncio in ads">
+<div ng-show="anuncios.length">
+    <div ng-repeat="anuncio in anuncios">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
@@ -46,10 +47,14 @@
                         {{anuncio.preco | currency: 'R$ '}}
                     </div>
                 </div>
+                <br>
+                <div align="right">
+                    <button class="btn btn-info" type="button">Comprar</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div ng-hide="ads.length">
+<div ng-hide="anuncios.length">
     <p>Não há anúncios cadastrados.</p>
 </div>
