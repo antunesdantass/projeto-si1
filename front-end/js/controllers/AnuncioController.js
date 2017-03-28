@@ -1,4 +1,4 @@
-angular.module('adExtreme').controller('AnuncioController', function ($scope, $rootScope, AnuncioService, $routeParams) {
+angular.module('adExtreme').controller('AnuncioController', function ($scope, $rootScope, AnuncioService, $routeParams, toastr) {
 
     $scope.adCreate = {};
     $scope.adBuy= {};
@@ -40,10 +40,11 @@ angular.module('adExtreme').controller('AnuncioController', function ($scope, $r
         // $scope.ad["@type"] = $scope.type;
         AnuncioService.save($scope.adCreate)
             .then(function (ad) {
-                toastr.success('Salvo com sucesso', 'Sucesso')
+                toastr.success('Salvo com sucesso', 'Sucesso');
             })
             .catch(function (error) {
-                toastr.error('Não foi possível salvar', 'Erro')
+                toastr.error('Não foi possível salvar', 'Erro');
+                console.log(error);
             });
     };
 

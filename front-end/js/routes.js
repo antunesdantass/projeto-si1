@@ -14,7 +14,7 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
             templateUrl: 'views/anuncio/listar_anuncios.html',
             controller: 'AnuncioController'
         })
-        .when('/anuncio/:id', {
+        .when('/anuncio', {
             templateUrl: 'views/anuncio/criar_anuncio.html',
             controller: 'AnuncioController',
             requiredAuth: true

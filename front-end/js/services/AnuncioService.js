@@ -19,4 +19,9 @@ angular.module('adExtreme').service('AnuncioService', function ($resource) {
     this.save = function (ad) {
         return adResource.save(ad).$promise;
     };
+
+    this.buy = function (idAnuncio) {
+        var buyResource = $resource('http://localhost:8080/ad-extreme/anuncio/:idAnuncio/comprar', {method: {update: 'PUT'}})
+        return buyResource.update();
+    }
 });
