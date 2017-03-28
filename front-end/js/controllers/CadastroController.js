@@ -1,5 +1,5 @@
-angular.module('adExtreme').controller('CadastroController', function ($scope, CadastroService, toastr) {
-    $scope.user = {'@type' : 'Fisica'};
+angular.module('adExtreme').controller('CadastroController', function ($scope, CadastroService, $location, toastr) {
+    $scope.user;
     $scope.type;
     $scope.pass1;
     $scope.pass2;
@@ -11,7 +11,16 @@ angular.module('adExtreme').controller('CadastroController', function ($scope, C
     $scope.save = function () {
         if (validatePass($scope.pass1, $scope.pass2)) {
             $scope.user.senha = $scope.pass1;
-            CadastroService.save($scope.user, $scope.type);
+            $scope.user['@type'] = $scope.type;
+            CadastroService.save($scope.user)
+                .then(function () {
+                    toastr.success('Sucesso.', 'Usuario cadastrado com sucesso');
+                    delete $scope.user, $scope.type, $scope.pass1, $scope.pass2;
+                    $location.path('/');
+                }).catch(function (error) {
+                    toastr.error('Error', 'Nao foi possível cadastrar');
+                    console.log(error);
+                });
         } else {
             toastr.error('As senhas não correspondem', 'Erro!');
         }
