@@ -4,7 +4,7 @@ angular.module('adExtreme').service("AutenticacaoService", function($http, $loca
         var url = 'http://localhost:8080/ad-extreme/usuario/email/' + userEmail + '/';
         $http.get(url)
             .then(function (res) {
-                $rootScope.user = res.data;
+                $rootScope.currentUser = res.data;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -19,7 +19,7 @@ angular.module('adExtreme').service("AutenticacaoService", function($http, $loca
                     setRootUser(loggedUser.email);
                     $localStorage.currentUser = loggedUser;
                     $http.defaults.headers.common.Authorization = 'x-auth-token ' + loggedUser.token;
-                    $location.path("#/");
+                    $location.path("/");
                     toastr.success('Sucesso.', 'Logado com sucesso.');
                 }
             })
@@ -31,6 +31,7 @@ angular.module('adExtreme').service("AutenticacaoService", function($http, $loca
 
     this.logout = function() {
         delete $localStorage.currentUser;
+        $rootScope.currentUser = {};
         $http.defaults.headers.common.Authorization = '';
     };
 

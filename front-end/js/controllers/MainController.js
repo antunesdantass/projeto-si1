@@ -1,6 +1,6 @@
 angular.module('adExtreme').controller('MainControler', function ($rootScope, AutenticacaoService) {
 
-    $rootScope.user = {};
+    $rootScope.currentUser = {};
 
     $rootScope.ads = [];
 

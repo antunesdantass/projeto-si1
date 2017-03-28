@@ -1,0 +1,36 @@
+<div class="page-header"><h3>Perfil</h3></div>
+
+<p><b>Nome: </b>{{currentUser.nome}}</p>
+<p><b>Email: </b>{{currentUser.email}}</p>
+<p>Pessoa {{currentUser["@type"]}}</p>
+<div>
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#changePassword">Alterar senha</button>
+</div>
+<div ng-include="'views/usuario/alterar_senha.html'"></div>
+
+<div class="divider"></div>
+
+<div ng-show="currentUser.">
+
+</div>
+<h3>Meus anúncios</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Preco</th>
+            <th>Tipo</th>
+            <th>Editar</th>
+            <th>Remover</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="ad in currentUser.anuncios">
+            <td>{{ad.titulo}}</td>
+            <td>{{ad.preco}}</td>
+            <td>{{ad['@type']}}</td>
+            <td><a>Editar</a></td>
+            <td><a>Remover</a></td>
+        </tr>
+    </tbody>
+</table>

@@ -15,12 +15,12 @@ angular.module('adExtreme').controller('CadastroController', function ($scope, C
             CadastroService.save($scope.user)
                 .then(function () {
                     toastr.success('Sucesso.', 'Usuario cadastrado com sucesso');
-                    delete $scope.user, $scope.type, $scope.pass1, $scope.pass2;
                     $location.path('/');
                 }).catch(function (error) {
                     toastr.error('Error', 'Nao foi possível cadastrar');
                     console.log(error);
                 });
+            delete $scope.user, $scope.type, $scope.pass1, $scope.pass2;
         } else {
             toastr.error('As senhas não correspondem', 'Erro!');
         }

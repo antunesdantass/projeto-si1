@@ -12,38 +12,27 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
     $routeProvider
         .when('/', {
             templateUrl: 'views/anuncio/listar_anuncios.html',
-            controller: 'AnuncioController',
-            authorize : false
-        })
-        .when('/empresa', {
-            templateUrl: 'views/empresa/home_empresa.html',
-            controller: 'UsuarioController',
-            authorize : true
+            controller: 'AnuncioController'
         })
         .when('/anuncio', {
             templateUrl: 'views/anuncio/criar_anuncio.html',
-            controller: 'AnuncioController',
-            authorize : false
+            controller: 'AnuncioController'
         })
         .when('/login', {
             templateUrl: 'views/autenticacao/login.html',
-            controller: 'LoginController',
-            authorize : false
+            controller: 'LoginController'
         })
         .when('/cadastro', {
             templateUrl: 'views/autenticacao/cadastro.html',
-            controller: 'CadastroController',
-            authorize : false
+            controller: 'CadastroController'
         })
-        .when('/usuario', {
-            templateUrl: 'views/usuario.html',
-            controller: 'UsuarioController',
-            authorize : true
+        .when('/conta', {
+            templateUrl: 'views/usuario/conta.html',
+            controller: 'UsuarioController'
         })
         .when('/anuncio/comprar', {
             templateUrl: 'view de comprar',
-            controller: 'ComprarController',
-            authorize : true
+            controller: 'ComprarController'
         })
         .when('/404', {
             templateUrl: 'views/error/404.html'
@@ -55,7 +44,7 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
             templateUrl: 'views/error/500.html'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/404'
         });
 
     // $locationProvider.hashPrefix('');
