@@ -28,7 +28,7 @@
             <td>{{ad.titulo}}</td>
             <td>{{ad.preco | currency: 'R$ '}}</td>
             <td>{{ad['@type']}}</td>
-            <td align="center"><a><span class="glyphicon glyphicon-edit"></span></a></td>
+            <td align="center"><a href="/anuncio/{{ad.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
             <td align="center"><a><span class="glyphicon glyphicon-remove"></span></a></td>
         </tr>
         </tbody>

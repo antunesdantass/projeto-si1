@@ -8,11 +8,20 @@ angular.module('adExtreme').service('AnuncioService', function ($resource) {
         return this.types[0];
     };
 
-    this.getAds = function () {
-        return adResource.query();
+    this.getAds = function (query) {
+        return adResource.query(query).$promise;
+    };
+
+    this.getAd = function (id) {
+        return adResource.get(id).$promise;
     };
 
     this.save = function (ad) {
-        adResource.save(ad);
+        return adResource.save(ad).$promise;
     };
+
+    this.buy = function (idAnuncio) {
+        var buyResource = $resource('http://localhost:8080/ad-extreme/anuncio/:idAnuncio/comprar', {method: {update: 'PUT'}})
+        return buyResource.update();
+    }
 });
