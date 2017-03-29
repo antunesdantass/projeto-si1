@@ -15,7 +15,7 @@ angular.module('adExtreme').controller('AnuncioComprarController', function ($sc
     getAd($routeParams.idAnuncio);
 
     $scope.buy = function () {
-        AnuncioService.buy($scope.adBuy)
+        AnuncioService.buy($scope.adBuy.id)
             .then(function (ad) {
                 toastr.success('Comprado com sucesso', 'Sucesso');
             })

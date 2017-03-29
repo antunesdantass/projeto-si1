@@ -32,6 +32,11 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
             controller: 'UsuarioController',
             requiredAuth: true
         })
+        .when('/extrato', {
+            templateUrl: 'views/usuario/extrato.html',
+            controller: 'UsuarioController',
+            requiredAuth: true
+        })
         .when('/comprar_anuncio/:idAnuncio', {
             templateUrl: 'views/anuncio/comprar_anuncio.html',
             controller: 'AnuncioComprarController',

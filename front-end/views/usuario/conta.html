@@ -2,11 +2,11 @@
 
 <p><b>Nome: </b>{{currentUser.nome}}</p>
 <p><b>Email: </b>{{currentUser.email}}</p>
-<p>Pessoa {{currentUser["@type"]}}</p>
+<p><b>Tipo: </b>Pessoa {{currentUser["@type"]}}</p>
+<p><b>Saldo: </b>{{currentUser.financas.saldo}}</p>
 <div>
-    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#changePassword">Alterar senha</button>
+    <a class="btn btn-warning" href="/extrato">Extrato</a>
 </div>
-<div ng-include="'views/usuario/alterar_senha.html'"></div>
 
 <div class="divider"></div>
 

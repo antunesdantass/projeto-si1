@@ -24,7 +24,7 @@ angular.module('adExtreme').controller('AnuncioController', function ($scope, $r
     }
 
     $scope.save = function () {
-        var promise = $scope.editing ? AnuncioService.save($scope.adCreate) : AnuncioService.update($scope.adCreate);
+        var promise = $scope.editing ? AnuncioService.update($scope.adCreate) : AnuncioService.save($scope.adCreate);
         // AnuncioService.save($scope.adCreate)
         promise
             .then(function (ad) {
@@ -34,5 +34,6 @@ angular.module('adExtreme').controller('AnuncioController', function ($scope, $r
                 toastr.error('Não foi possível salvar', 'Erro');
                 console.log(error);
             });
+        // AnuncioService.refreshUserAds();
     };
 });
