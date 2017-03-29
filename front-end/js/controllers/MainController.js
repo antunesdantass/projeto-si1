@@ -1,24 +1,18 @@
-angular.module('adExtreme').controller('MainControler', function ($rootScope, AutenticacaoService) {
+angular.module('adExtreme').controller('MainControler', function ($rootScope, AutenticacaoService, UsuarioService) {
 
     $rootScope.currentUser = {};
 
-    $rootScope.anuncios = [
-        // {
-        //     titulo: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-        //     preco: 4,
-        //     '@type': 'movel',
-        //     dataDeCriacao: new Date()
-        // },
-        // {
-        //     titulo: 'bbaa',
-        //     preco: 4,
-        //     '@type': 'servico',
-        //     dataDeCriacao: new Date()
-        // }
-    ];
+    $rootScope.anuncios = [];
 
     $rootScope.isLogged = function() {
         return AutenticacaoService.isLogged();
+    };
+
+    $rootScope.updateUser = function () {
+        UsuarioService.getUser($rootScope.currentUser.id)
+            .then(function (user) {
+                $rootScope.currentUser = user;
+            })
     };
 
     $rootScope.logout = function() {

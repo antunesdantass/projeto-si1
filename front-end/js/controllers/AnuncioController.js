@@ -1,24 +1,11 @@
 angular.module('adExtreme').controller('AnuncioController', function ($scope, $rootScope, AnuncioService, $routeParams, toastr) {
 
     $scope.adCreate = {};
-    $scope.adBuy= {};
 
-    $scope.type = $scope.adCreate['@type'] = AnuncioService.getFirstType();
+    $scope.adCreate['@type'] = AnuncioService.getFirstType();
     $scope.allTypes = AnuncioService.types;
 
-    $scope.filter = 'date';
     $scope.editing = false;
-
-    function getAds(query) {
-        AnuncioService.getAds(query)
-            .then(function (ads) {
-                $rootScope.anuncios = ads;
-            })
-            .catch(function (error) {
-                toastr.error('Não foi possível obter anúncios', 'Erro');
-                console.log(error);
-            })
-    }
 
     function getOneAdd(id) {
         AnuncioService.getAd(id)
@@ -31,14 +18,15 @@ angular.module('adExtreme').controller('AnuncioController', function ($scope, $r
             });
     }
 
-    if ($routeParams.id) {
-        getOneAdd($routeParams.id);
+    if ($routeParams.idAnuncio) {
+        getOneAdd($routeParams.idAnuncio);
         $scope.editing = true
     }
 
     $scope.save = function () {
-        // $scope.ad["@type"] = $scope.type;
-        AnuncioService.save($scope.adCreate)
+        var promise = $scope.editing ? AnuncioService.save($scope.adCreate) : AnuncioService.update($scope.adCreate);
+        // AnuncioService.save($scope.adCreate)
+        promise
             .then(function (ad) {
                 toastr.success('Salvo com sucesso', 'Sucesso');
             })
@@ -47,8 +35,4 @@ angular.module('adExtreme').controller('AnuncioController', function ($scope, $r
                 console.log(error);
             });
     };
-
-    $scope.buy = function () {
-
-    }
 });
