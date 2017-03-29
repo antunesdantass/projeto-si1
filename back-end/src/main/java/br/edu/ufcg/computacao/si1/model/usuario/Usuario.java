@@ -39,6 +39,7 @@ public abstract class Usuario {
     @Column(unique = true)
     private String email;
 
+    @JsonIgnore
     @NotNull(message = "A senha não pode ser nula.")
     @NotEmpty
     @Size(min = 4, max = 16, message = "A senha deve ter entre 4 e 16 caracteres.")

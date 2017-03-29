@@ -5,22 +5,22 @@ package br.edu.ufcg.computacao.si1.model.usuario;
  */
 public class LoggedUser {
 
-    private String email;
+    private Usuario usuario;
     private String token;
 
-    public LoggedUser(String email, String token) {
-        this.email = email;
+    public LoggedUser(Usuario usuario, String token) {
+        this.usuario = usuario;
         this.token = token;
     }
 
     public LoggedUser() {}
 
-    public String getEmail() {
-        return email;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getToken() {
