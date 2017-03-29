@@ -61,7 +61,9 @@ public abstract class Anuncio {
     @Column(name = "nota")
     private Nota nota;
 
-    public Anuncio() {}
+    public Anuncio() {
+        this.dataDeCriacao = new Date();
+    }
 
     public Anuncio(String titulo, double preco) {
         this.titulo = titulo;
