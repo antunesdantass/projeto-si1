@@ -33,7 +33,7 @@ public class AnuncioCreatorImpl implements AnuncioCreator {
             if (usuario instanceof PessoaJuridica) {
                 anuncio.setUsuario(usuario);
                 usuario.addAnuncio(anuncio);
-                usuarioService.update(usuario);
+                //usuarioService.update(usuario);
                 return anuncioRepository.save(anuncio);
             } else {
                 throw new UserNotAllowedException();
@@ -41,7 +41,7 @@ public class AnuncioCreatorImpl implements AnuncioCreator {
         } else {
             anuncio.setUsuario(usuario);
             usuario.addAnuncio(anuncio);
-            usuarioService.update(usuario);
+            //usuarioService.update(usuario);
             return anuncioRepository.save(anuncio);
         }
     }

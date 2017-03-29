@@ -39,7 +39,7 @@ public class LoginController {
                 return new ResponseEntity<LoggedUser>(HttpStatus.UNAUTHORIZED);
             }
         } catch (UserNotFoundException e) {
-            return new ResponseEntity<LoggedUser>(HttpStatus.NOT_FOUND;)
+            return new ResponseEntity<LoggedUser>(HttpStatus.NOT_FOUND);
         }
     }
 
