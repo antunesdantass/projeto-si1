@@ -58,4 +58,30 @@ public class AnuncioController {
         }
     }
 
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.PUT,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Anuncio> update(@RequestParam("id") Long id, @RequestBody Anuncio anuncio) {
+        if (id == anuncio.getId()) {
+            return new ResponseEntity<Anuncio>(anuncioService.update(anuncio), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Anuncio>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.DELETE
+    )
+    public ResponseEntity delete(@RequestParam("id") Long id) {
+        if (anuncioService.getById(id) != null) {
+            anuncioService.delete(id);
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
