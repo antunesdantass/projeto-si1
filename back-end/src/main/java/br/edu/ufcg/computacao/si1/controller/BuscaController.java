@@ -52,7 +52,7 @@ public class BuscaController {
             value = "/tipo/{tipo}",
             method = RequestMethod.GET
     )
-    public List<Anuncio> getByTipo(@RequestParam("tipo") String tipo) {
+    public List<Anuncio> getByTipo(@PathVariable("tipo") String tipo) {
         return buscaService.getByTipo(tipo);
     }
 

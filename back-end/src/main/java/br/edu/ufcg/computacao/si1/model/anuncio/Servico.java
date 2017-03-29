@@ -3,11 +3,13 @@ package br.edu.ufcg.computacao.si1.model.anuncio;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.util.Date;
 
 /**
  * Created by Antunes Dantas.
  */
+@Entity
 public class Servico extends Anuncio {
 
 

@@ -63,7 +63,7 @@ public class AnuncioController {
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Anuncio> update(@RequestParam("id") Long id, @RequestBody Anuncio anuncio) {
+    public ResponseEntity<Anuncio> update(@PathVariable("id") Long id, @RequestBody Anuncio anuncio) {
         if (id == anuncio.getId()) {
             return new ResponseEntity<Anuncio>(anuncioService.update(anuncio), HttpStatus.OK);
         } else {
@@ -75,7 +75,7 @@ public class AnuncioController {
             value = "/{id}",
             method = RequestMethod.DELETE
     )
-    public ResponseEntity delete(@RequestParam("id") Long id) {
+    public ResponseEntity delete(@PathVariable("id") Long id) {
         if (anuncioService.getById(id) != null) {
             anuncioService.delete(id);
             return new ResponseEntity(HttpStatus.OK);

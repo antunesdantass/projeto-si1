@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @CrossOrigin
 @RequestMapping("ad-extreme/anuncio/")
+@RestController
 public class FinancasController {
 
     @Autowired
