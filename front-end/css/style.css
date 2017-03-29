@@ -3,11 +3,22 @@
 	padding: 10px;
 }
 
-form {
+.form-cadastro {
 	padding: 10px;
 	width: 100%;
 	max-width: 600px;
 	margin: auto;
+}
+
+.col-md-2 {
+    width: 11.5%;
+}
+
+.form-filtro {
+	padding: 10px;
+	width: 100%;
+	max-width: 90%;
+	margin-bottom: 20px;
 }
 
 .input-group {
