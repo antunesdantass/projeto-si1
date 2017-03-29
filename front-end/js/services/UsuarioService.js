@@ -1,4 +1,4 @@
-angular.module('adExtreme').service('UsuarioService', function ($resource, $localStorage, $http) {
+angular.module('adExtreme').service('UsuarioService', function ($resource, $localStorage, $http, $rootScope) {
 
     this.getUser = function (id) {
         // var token = $localStorage.currentUser ? $localStorage.currentUser.token : null;
@@ -11,6 +11,6 @@ angular.module('adExtreme').service('UsuarioService', function ($resource, $loca
         //     }
         // });
         // return Usuario.get({id: id}).$promise;
-        return $http.get('http://localhost:8080/ad-extreme/usuario/id/' + id);
+        return $http.get($rootScope.server + 'ad-extreme/usuario/id/' + id);
     }
 });

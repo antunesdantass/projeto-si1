@@ -1,7 +1,7 @@
 angular.module('adExtreme').service('AnuncioService', function ($resource, $localStorage, $rootScope) {
 
-    var adUrl = 'http://localhost:8080/ad-extreme/anuncio/:id';
-    var searchUrl = 'http://localhost:8080/ad-extreme/anuncio/pesquisa/';
+    var adUrl = $rootScope.server + 'ad-extreme/anuncio/:id';
+    var searchUrl = $rootScope.server + 'ad-extreme/anuncio/pesquisa/';
 
     function getResource(url) {
         var token = $localStorage.currentUser ? $localStorage.currentUser.token : null;
@@ -50,7 +50,7 @@ angular.module('adExtreme').service('AnuncioService', function ($resource, $loca
     };
 
     this.buy = function (idAnuncio) {
-        var buyResource = getResource('http://localhost:8080/ad-extreme/anuncio/' + idAnuncio + '/comprar');
+        var buyResource = getResource($rootScope.server + 'ad-extreme/anuncio/' + idAnuncio + '/comprar');
         return buyResource.update({idComprador: $rootScope.currentUser.id}).$promise;
     }
 });

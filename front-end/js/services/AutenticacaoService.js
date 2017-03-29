@@ -1,7 +1,7 @@
 angular.module('adExtreme').service("AutenticacaoService", function($http, $localStorage, $location, toastr, $rootScope) {
 
     this.login = function(user) {
-        var req = {url : 'http://localhost:8080/login', method : 'POST', data : user};
+        var req = {url : $rootScope.server + 'login', method : 'POST', data : user};
         $http(req)
             .then(function successCallback(response) {
                 if (response.data.token) {

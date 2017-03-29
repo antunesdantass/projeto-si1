@@ -1,5 +1,7 @@
 angular.module('adExtreme').controller('MainControler', function ($rootScope, AutenticacaoService, UsuarioService) {
 
+    $rootScope.server = 'http://localhost:8080/';
+
     $rootScope.currentUser = {};
 
     $rootScope.anuncios = [];
