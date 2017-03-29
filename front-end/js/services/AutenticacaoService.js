@@ -8,7 +8,6 @@ angular.module('adExtreme').service("AutenticacaoService", function($http, $loca
                     var loggedUser = {user : response.data.usuario, token : response.data.token};
                     $localStorage.currentUser = loggedUser;
                     $rootScope.currentUser = response.data.usuario;
-                    // $http.defaults.headers.common.Authorization = 'x-auth-token ' + loggedUser.token;
                     $http.defaults.headers.common['x-auth-token'] = loggedUser.token;
                     $location.path("/");
                     toastr.success('Logado com sucesso.','Sucesso.');
@@ -23,11 +22,10 @@ angular.module('adExtreme').service("AutenticacaoService", function($http, $loca
     this.logout = function() {
         delete $localStorage.currentUser;
         $rootScope.currentUser = {};
-        $http.defaults.headers.common.Authorization = '';
+        $http.defaults.headers.common['x-auth-token'] = '';
     };
 
     this.isLogged = function() {
-        // return $http.defaults.headers.common.Authorization != null && $http.defaults.headers.common.Authorization !=  '';
         return $http.defaults.headers.common['x-auth-token'] != null && $http.defaults.headers.common['x-auth-token'] !=  '';
     }
 });   

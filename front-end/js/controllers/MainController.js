@@ -4,12 +4,15 @@ angular.module('adExtreme').controller('MainControler', function ($rootScope, Au
 
     $rootScope.anuncios = [];
 
+    $rootScope.toUpdate = false;
+
     $rootScope.isLogged = function() {
         return AutenticacaoService.isLogged();
     };
 
     $rootScope.updateUser = function () {
-        UsuarioService.getUser($rootScope.currentUser.id)
+        var id = $rootScope.currentUser.id;
+        UsuarioService.getUser(id)
             .then(function (user) {
                 $rootScope.currentUser = user;
             })

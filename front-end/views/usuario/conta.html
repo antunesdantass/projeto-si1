@@ -3,7 +3,7 @@
 <p><b>Nome: </b>{{currentUser.nome}}</p>
 <p><b>Email: </b>{{currentUser.email}}</p>
 <p><b>Tipo: </b>Pessoa {{currentUser["@type"]}}</p>
-<p><b>Saldo: </b>{{currentUser.financas.saldo}}</p>
+<p><b>Saldo: </b>{{currentUser.financas.saldo | currency: 'R$ '}}</p>
 <div>
     <a class="btn btn-warning" href="/extrato">Extrato</a>
 </div>
@@ -29,7 +29,7 @@
             <td>{{ad.preco | currency: 'R$ '}}</td>
             <td>{{ad['@type']}}</td>
             <td align="center"><a href="/anuncio/{{ad.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
-            <td align="center"><a><span class="glyphicon glyphicon-remove"></span></a></td>
+            <td align="center"><a ng-click="removeAd(ad.id)"><span class="glyphicon glyphicon-remove"></span></a></td>
         </tr>
         </tbody>
     </table>

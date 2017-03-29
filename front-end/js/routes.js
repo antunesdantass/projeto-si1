@@ -61,5 +61,9 @@ angular.module('adExtreme').config(function ($routeProvider, $locationProvider, 
         if (newUrl.requiredAuth && !$rootScope.isLogged()) {
             $location.path('/login');
         }
+        // if ($rootScope.toUpdate) {
+        //     $rootScope.updateUser();
+        //     $rootScope.toUpdate = false;
+        // }
     })
 });

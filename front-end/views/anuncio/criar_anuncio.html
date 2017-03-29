@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" ng-hide="editing">
         <label for="tipoAnuncio" class="control-label">Tipo</label>
         <select class="form-control" id="tipoAnuncio" ng-model="adCreate['@type']" ng-options="type as type for type in allTypes"></select>
     </div>

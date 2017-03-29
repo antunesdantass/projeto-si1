@@ -1,0 +1,12 @@
+<div ng-show="currentUser.finanacas.extrato.length">
+    <div ng-repeat="transacao in currentUser.finanacas.extrato">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>{{transacao}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-hide="currentUser.finanacas.extrato.length">
+    <p>Não há transações.</p>
+</div>

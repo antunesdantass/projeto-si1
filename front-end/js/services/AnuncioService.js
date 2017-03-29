@@ -1,47 +1,56 @@
-angular.module('adExtreme').service('AnuncioService', function ($resource, $localStorage) {
+angular.module('adExtreme').service('AnuncioService', function ($resource, $localStorage, $rootScope) {
 
-    var adResource = $resource('http://localhost:8080/ad-extreme/anuncio/:id', null, {
-        'update': { method: 'PUT' }
-    });
+    var adUrl = 'http://localhost:8080/ad-extreme/anuncio/:id';
+    var searchUrl = 'http://localhost:8080/ad-extreme/anuncio/pesquisa/';
 
-    this.types = ['movel', 'imovel', 'emprego', 'servico']; // pegar do servidor
+    function getResource(url) {
+        var token = $localStorage.currentUser ? $localStorage.currentUser.token : null;
+        return $resource(url, null, {
+            'update': { method: 'PUT', headers: { 'x-auth-token': token }  }
+        });
+    }
+
+    var typesFisica = ['movel', 'imovel'];
+    var typesJuridica = ['movel', 'imovel', 'emprego', 'servico'];
+    this.types = $rootScope.currentUser['@type'] == 'Fisica' ? typesFisica : typesJuridica;
 
     this.getFirstType = function () {
         return this.types[0];
     };
 
-    this.getAds = function (query) {
-        return adResource.query(query).$promise;
+    this.getAds = function () {
+        var adResource = getResource(adUrl);
+        return adResource.query().$promise;
     };
 
     this.getAd = function (id) {
+        var adResource = getResource(adUrl);
         return adResource.get({id: id}).$promise;
     };
 
     this.save = function (ad) {
+        var adResource = getResource(adUrl);
         return adResource.save(ad).$promise;
-        // return $http.post('http://localhost:8080/ad-extreme/anuncio', ad);
     };
 
     this.update = function (ad) {
-        return adResource.update(ad).$promise;
-        // return $http.post('http://localhost:8080/ad-extreme/anuncio', ad);
+        var adResource = getResource(adUrl);
+        return adResource.update({id: ad.id}, ad).$promise;
     };
 
-    // this.refreshUserAds = function () {
-    //     var search = $resource('http://localhost:8080/ad-extreme/anuncio/pesquisa/usuario/' + $rootScope.currentUser.email + '/');
-    //     search.query().$promise
-    //         .then(function (anuncios) {
-    //             $rootScope.currentUser.anuncios = anuncios;
-    //         })
-    // };
+    this.removeAd = function (idAd) {
+        var adResource = getResource(adUrl);
+        return adResource.delete({id: idAd}).$promise;
+    };
+
+    this.search = function (filter, query) {
+        var searchAux = searchUrl + filter + '/' + query;
+        var searchResource = $resource(searchAux);
+        return searchResource.query().$promise;
+    };
 
     this.buy = function (idAnuncio) {
-        // var buyResource = $resource('http://localhost:8080/ad-extreme/anuncio/:idAnuncio/comprar', null, {
-        var buyResource = $resource('http://localhost:8080/ad-extreme/anuncio/' + idAnuncio + '/comprar', null, {
-            'update': { method: 'PUT', headers: { 'x-auth-token': $localStorage.currentUser.token } }
-        });
-        // return buyResource.update({idAnuncio: idAnuncio}).$promise;
-        return buyResource.update().$promise;
+        var buyResource = getResource('http://localhost:8080/ad-extreme/anuncio/' + idAnuncio + '/comprar');
+        return buyResource.update({idComprador: $rootScope.currentUser.id}).$promise;
     }
 });

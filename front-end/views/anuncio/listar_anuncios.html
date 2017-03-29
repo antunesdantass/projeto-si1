@@ -3,15 +3,15 @@
 </div>
 
 <div class="form-filtro">
-    <form class="form-inline" ng-submit="getAds()">
+    <form class="form-inline" ng-submit="search()">
         <div class="row">
             <b class="col-md-1">Filtrar por:</b>
             <select class="form-control col-md-1" ng-model="filter">
-                <option value="date">Data</option>
-                <option value="type">Tipo</option>
+                <option value="data">Data</option>
+                <option value="tipo">Tipo</option>
             </select>
 
-            <div ng-show="filter == 'date'" class="col-md-5">
+            <div ng-show="filter == 'data'" class="col-md-5">
                 <div class="form-group">
                     <label for="dateFromFilter">De</label>
                     <input type="date" id="dateFromFilter" class="form-control" ng-model="date1">
@@ -21,7 +21,7 @@
                     <input type="date" id="dateToFilter" class="form-control" ng-model="date2">
                 </div>
             </div>
-            <div ng-show="filter == 'type'" class="col-md-2">
+            <div ng-show="filter == 'tipo'" class="col-md-2">
                 <div class="form-group">                    
                     <select ng-model="type" class="form-control">
                         <option ng-repeat="type in allTypes" value="{{type}}">{{type}}</option>
